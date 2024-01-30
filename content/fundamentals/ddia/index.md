@@ -1,40 +1,38 @@
 ---
 title: Designing Data Intensive Applications
 ---
+`**Note: this section is under construction**`
 
-Welcome to my notes on the book `Designing Data Intensive Applications`. I first became interested in this topic 
+Welcome to my notes on the book `Designing Data Intensive Applications`. DDIA is a classic software engineering book and considered a must-read by many engineers.
 
-The book I used to learn this topic was [High-Performance Browser Networking by Ilya Grigorik]()- I also supplemented with some material from [here]() and [here]().
+I used this book to learn a bit more about data systems in real world, large scale applications.
 
 ## the why and what
 
-Before we dive into `insert topic`, let's understand why you should care about it in the first place.
+What is `Designing Data Intensive Applications`? 
+- It’s a book on designing data intensive applications
+- Just kidding. 
+- Well yet, but
+- More specifically, it’s a very broad book on the fundamental principles of system design (with many [reference links](https://github.com/ept/ddia-references) if you want to go deeper)
 
-`insert topic` is a _.
+Why should we care about this book’s content on system design / data intensive applications?
+- It’s good to know how data systems work at a fundamental level
 
 It's useful for 
-- Thing #1
-- Thing #2
-- Thing #3
+- Architecting services
+- Selecting data systems
+- Deeply understanding architectures you work with on a day to day basis
 
 ## things you can do with this
 
-If you're anything like me, you'd love to learn this for no reason- but it's good to know what skills you can expect to learn with this content.go
+The material from this reference section will be essential for
+- Understanding data systems
+- Picking and choosing between different design approaches
 
-With the maerial in these pages you should be able to build
-- A flying car or something equally as fun
-- Tweets with 128 characters
-
-Here's some stuff I've directly used this content to build
-- Link 1
-- Link 2
-
-
-## the content
+# TOC
 
 I'd recommend reading in order of the files, but I've tried to make the information as atomic as possible- enjoy!
 
-1. [[/1|Section 1]] useful for this that and the other
-2. [[/1|Section 1]] useful for this that and the other
-3. [[/1|Section 1]] useful for this that and the other
-4. [[/1|Section 1]] useful for this that and the other
+1. [[/fundamentals/ddia/Data|Data]] How do we represent data? 
+1. [[/fundamentals/ddia/Derived Data|Derived Data]] How do we represent data? 
+1. [[/fundamentals/ddia/Distributed Data|Distributed Data]] How do we represent data? 

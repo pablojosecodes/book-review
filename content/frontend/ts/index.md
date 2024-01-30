@@ -1,6 +1,8 @@
 ---
 title: Typescript
 ---
+`**Note: this section is under construction**`
+
 
 Welcome to my notes on `Typescript`. I first became interested in Typescript after listening to a friend at a dinner party talk about how much better his life became after Google migrated his project to Typescript from Javscript. By then, I'd had a good handle on the various programming paradigms and *conceptually* why a strongly and statically typed language could be useful, but hadn't really felt it for myself.
 
@@ -17,13 +19,32 @@ Before we dive into `Typescript`, let's understand why you should care about it 
 
 
 It's useful for 
-- Thing #1
-- Thing #2
-- Thing #3
+- Enhancing code quality and readability through static typing.
+- Catching errors at compile-time, reducing runtime errors.
+- Facilitating large-scale application development with better structuring and maintainability.
 
 
 To give you a quick look into the difference between JavaScript and Typescript, here are two short code samples side by side.
 
+Javascript $\Downarrow$
+```javascript
+function addNumbers(a, b) {
+    return a + b;
+}
+
+let result = addNumbers(5, '10'); // JavaScript doesn't catch type mismatch here
+console.log(result); // Outputs: '510', as '10' is treated as a string
+```
+
+Typescript $\Downarrow$
+```typescript
+function addNumbers(a: number, b: number): number {
+    return a + b;
+}
+
+let result = addNumbers(5, '10'); // TypeScript will throw an error here
+console.log(result);
+```
 
 ## things you can do with this
 

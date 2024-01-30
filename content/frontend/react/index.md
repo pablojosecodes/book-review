@@ -1,6 +1,7 @@
 ---
 title: React
 ---
+`**Note: this section is under construction**`
 
 Welcome to my notes on `React`. I (like many full-stack engineers) have been using React for a **very** long time (by my standards for long); it's compositional tree-like structure makes intuitive sense, and I've always appreciated the robust community that it's spurred. 
 
@@ -12,19 +13,23 @@ After some exploration, I couldn't find any book nearly as well-written or up to
 
 Before we dive into `React`, let's understand why you should care about it in the first place.
 
-`React` is a javascript framework.
+`React` is a JavaScript library for building user interfaces, primarily for web applications.
 
-Its useful for 
-- Thing #1
-- Thing #2
-- Thing #3
+It's useful for:
+- Creating dynamic and interactive web applications with efficient UI updates and rendering.
+- Building large-scale applications with reusable components and efficient data management.
+- Enhancing the user experience with fast and responsive interfaces.
 
 ## things you can do with this
 
-If you're anything like me, you'd love to learn this for no reason- but it's good to know what skills you can expect to learn with this content.go
+If you're anything like me, you'd love to learn this for no reason - but it's good to know what skills you can expect to learn with this content.
 
-With the materials in these pages you should be able to build
-- Any fully reactive SPA
+With the materials in these pages, you should be able to build:
+- Any fully reactive Single Page Application (SPA) that dynamically updates the UI without reloading the page.
+- Components that are reusable across different parts of your application or even in different projects.
+- Complex applications with state management, using tools like Redux or React's own Context API.
+- Integration with APIs and external data sources to fetch, display, and manage data.
+- Modern web applications with features like routing, lazy loading, and asynchronous data handling.
 
 I've done almost all my consulting, full-time work, web-app projects, and products in React.
 

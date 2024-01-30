@@ -1,34 +1,34 @@
 ---
 title: Networking
 ---
+`**Note: this section is under construction**`
 
-Welcome to my notes on `networking`. I first became interested in this topic 
+Welcome to my notes on `networking`. I first became interested in this topic when I was building a collaborative WYSIWYG musical editor and realized… I didn’t even know where to start with the “collaborative” piece.
 
-The book I used to learn this topic was [High-Performance Browser Networking by Ilya Grigorik]()- I also supplemented with some material from [here]() and [here]().
+The book I used to learn this topic was [High-Performance Browser Networking by Ilya Grigorik](https://hpbn.co/)
 
 ## the why and what
 
 Before we dive into `networking`, let's understand why you should care about it in the first place.
 
-`networking` is a _.
+`Networking` is a critical aspect of computer science that involves the exchange of data and resources between computers over a shared or public network.
 
-It's useful for 
-- Thing #1
-- Thing #2
-- Thing #3
+It's useful for:
+- Establishing and maintaining reliable and efficient communication channels between devices.
+- Enhancing the performance and scalability of web applications and services.
+- Securing data transfer and access across networks.
 
 ## things you can do with this
 
-If you're anything like me, you'd love to learn this for no reason- but it's good to know what skills you can expect to learn with this content.go
+If you're anything like me, you'd love to learn this for no reason - but it's good to know what skills you can expect to learn with this content.
 
-With the maerial in these pages you should be able to build
-- A flying car or something equally as fun
-- Tweets with 128 characters
+With the material in these pages, you should be able to build:
+1. Robust network infrastructures that support efficient data transmission.
+2. Secure and scalable web applications that leverage modern networking protocols.
+3. Optimization strategies for improving website performance and user experience.
 
 Here's some stuff I've directly used this content to build
 - Link 1
-- Link 2
-
 
 ## the content
 
