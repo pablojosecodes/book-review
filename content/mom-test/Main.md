@@ -1,64 +1,11 @@
-<!-----
-
-
-
-Conversion time: 1.491 seconds.
-
-
-Using this Markdown file:
-
-1. Paste this output into your source file.
-2. See the notes and action items below regarding this conversion run.
-3. Check the rendered output (headings, lists, code blocks, tables) for proper
-   formatting and use a linkchecker before you publish this page.
-
-Conversion notes:
-
-* Docs to Markdown version 1.0β35
-* Wed Jan 31 2024 02:01:57 GMT-0800 (PST)
-* Source doc: Mom test notes
-* This is a partial selection. Check to make sure intra-doc links work.
------>
-
-
-Title: The Mom Test
-
-Headline: Learn what your customers’ problems are, more effectively
-
-
-## The early founder’s dilemma
-
-Michael E. Gerber wrote in his much-acclaimed book <span style="text-decoration:underline;">E-Myth</span> about the so-called “fatal assumption” that people transition from employee to founder often make- thinking that since they have a deep understanding of the technical parts of the business they work within, they should/must be able to run the business themselves, if only they had the freedom to. Of course, it’s called a fatal assumption for a reason, as there are many non-technical aspects involved in making any business succeed. 
-
-The most commonly understood one, perhaps, being customer research. How many times have we heard stories of people who had a brilliant “billion dollar idea” who then went on to purposefully keep it to themself- building in secrecy for fear that their idea would be stolen, or those who went on to talk to a few potential customers and then build, equally unexposed to customer feedback, for months, perhaps years. This, I’ve learned, is often the exact wrong way to go about building a business.
-
-Now that we’ve accepted that customer feedback is essential, the question becomes “how does one effectively conduct and implement its learnings?”
-
-
-## The Mom Test
-
- \
-Here comes into play one of my favorite (hand)books, the Mom test ([https://www.momtestbook.com/](https://www.momtestbook.com/)) - which is all about how to validate your idea while talking to customers. 
-
-You might be thinking “do we really we need an entire book on how to talk to customers?” Yes, yes we certainly do.
-
-Take the author of the book as a prototypical example- he mentioned in an interview that he spent more than 2 years building the wrong product because he incorrectly talked to customers. 
-
-Let’s do a quick quiz -which of the following questions do you think are good questions to ask while talking to customers?
-
-
-
-1. Could you take me through the last time that [problem] happened?
-2. How much would you pay [for my solution]?
-3. Do you think it’s a good idea?
-
-I’ve included the answers at the bottom of this page, but by the end of reading this, it should be fairly clear which are poor/good questions.
-
+---
+title: Main
+description: Will add more subsections later
+---
 
 ## Some principles
 
 The book declares the following as its principles
-
 
 
 1. Talk about the customer’s life instead of your idea
@@ -78,9 +25,6 @@ So, the first step is to
 * Gather as much information about your customers’ lives so you can then take your own visionary leap to a solution
 
 Next step
-
-
-
 * Confirm it’s correct + refine
 
 Avoid bad data
@@ -94,8 +38,6 @@ Compliments
 * Strike to the truth
 
 Fluff (“Always” “Usually” “Never” “Would”)
-
-
 
 * Example: I would totally buy that
 * Sounds concrete, but is not.
@@ -113,9 +55,6 @@ Fluff (“Always” “Usually” “Never” “Would”)
         * Negative signal: “I’ve downloaded a couple of them- none have solved my need” or “I’ve tried them all- none actually solve my problem”
 
 Ideas
-
-
-
 * Do NOT take ideas as to do list items
 * Ask WHY they want the idea to be built. What is it SOLVING?
 * Questions to dig into feature request
@@ -134,16 +73,10 @@ Ideas
     * Go on…
 
 Stop seeking approval
-
-
-
 * Keep focus on other person
 * Keep specific about problems, concrete cases, etc.
 
 Cut off pitches (distinct affair)
-
-
-
 * If you find yourself, trying to convince other person- apologise
 * Anyone will give you a fake phone number if you’re annoying enough
 
@@ -167,9 +100,6 @@ Make sure users actually care about the problem. Users might not care about anyt
 * Anchor with what’s important- like asking a guy “What are your big goals and focuses right now?” and then talking about health in the context of that (if building a health solution). Not always necessary if you know they care about something already (ie. marketing company obviously cares about marketing)
 
 Does this problem matter questions (eventually zoom in)
-
-
-
 * How seriously do you take X?
 * Do you make money from it?
 * Have you tried making more money from it?
@@ -243,9 +173,6 @@ Kinds of commitment
 Good and bad meetings
 
 Badd meeting
-
-
-
 * So cool. Love it.
     * Reflect- get back to business
 * Let me know when it launches. Sounds great.
@@ -258,9 +185,6 @@ Badd meeting
     * Get concrete commitments
 
 Good meetings
-
-
-
 * What are next steps?
     * Know your next steps
 * Can I buy the prototype?
@@ -335,9 +259,6 @@ Having an audience
 Get clever
 
 Creating Warm intros
-
-
-
 * Just ask
 * If in right room, just call them out
 * 7 degrees of bacon still applies here

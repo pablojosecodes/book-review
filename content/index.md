@@ -29,4 +29,4 @@ If you're using any of these notes as reference material (sweet!), then do consi
 4. [[/ml/cuda|CUDA (Feb 2024)]]
 
 ## Entrepeneurship
-1. [[The Mom Test|The Mom Test (brief)]]
+1. [[/mom-test|The Mom Test (brief)]]

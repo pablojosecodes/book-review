@@ -34,5 +34,5 @@ The material from this reference section will be essential for
 I'd recommend reading in order of the files, but I've tried to make the information as atomic as possible- enjoy!
 
 1. [[/fundamentals/ddia/Data|Data]] How do we represent data? 
+1. [[/fundamentals/ddia/Distributed Data|Distributed Data]] How do we handle data systems across multiple machines?
 1. [[/fundamentals/ddia/Derived Data|Derived Data]] How do we represent data? 
-1. [[/fundamentals/ddia/Distributed Data|Distributed Data]] How do we represent data? 
