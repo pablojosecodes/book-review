@@ -30,33 +30,9 @@ But how do you distribute data across multiple nodes? There are two main approac
 - Replication: same data on different nodes
 - Partitioning: big dataset into smaller subsets
 
-The following section will mostly deal with distributed shared-nothing architectures.
-
-# Replication
-
-Recall, Replication = keeping copy of same data on multiple machines conneted via a network
-- Keeps data close to your users
-- Increases availability
-- Increases read throughput
-
-Note: for purposes of this section on `replication` we’ll assume your dataset is small enough for each machine to hold a copy of the entire dataset
-
-Where might issues arise with keeping multiple copies of the same data in a distributed fashion?  Well, the hard part of course is handling the changes to the replicated data. There are 3 common algorithms for dealing with this between nodes, which we’ll look into now
-- Single-leader
-- Multi-leader
-- Leaderless
-
-## Single Leader 
-
-The general process for a single leader architecture is as follows:
-- For writing from a client
-	- Writes must be sent to the leader
-	- This single **leader** is allowed to write to database.
-	- After writing, the leader sends the change to all its followers (via something called a *replication log*). Each replica updates its local data
-- For reading from a client
-	- Clients can read from the database by querying any of the replicas or leaders
+The following sections will mostly deal with distributed shared-nothing architectures.
 
 
-
-
-
+> [!TOC]
+> 1. [[Replication|Replication]] 
+> 2. [[Partitioning|Partitioning]] 
