@@ -1,6 +1,14 @@
 ---
 title: Interactivity
 ---
+A key use case of React is in having the UI *react* to events. This is known as interactivity. In order to master this aspect of React, ou’ll need to understand how to handle interactions, update state, and tie the state to the UI.
+
+I’ve organized this content into a few thought buckets
+
+1. [[Defining Events]]
+2. [[Fundamentals of State]]
+3. [[How React Handles State]]
+4. [[State Update Operations]]
 
 # Responding to events
 Event handlers: functions triggered in response to user interactions
@@ -169,7 +177,6 @@ const nextShapes = shapes.map(shape => {
   }
 });
 setShapes(nextShapes);
-
 ```
 
 Replacing items in array (map)

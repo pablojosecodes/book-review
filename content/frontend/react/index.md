@@ -33,13 +33,17 @@ With the materials in these pages, you should be able to build:
 
 I've done almost all my consulting, full-time work, web-app projects, and products in React.
 
-
 ## the content
 
 I'd recommend reading in order of the files, but I've tried to make the information as atomic as possible- enjoy!
 
 
-1. [[/frontend/react/1|Section 1]] useful for this that and the other
-2. [[/1|Section 1]] useful for this that and the other
-3. [[/1|Section 1]] useful for this that and the other
-4. [[/1|Section 1]] useful for this that and the other
+> [!TOC]
+> 1. [[frontend/react/interactivity/index|Interactivity]] 
+> 2. [[Managing State|Managing State]] 
+> 3. [[Escape Hatches|Escape Hatches]]
+> 4. [[Built-in Hooks]]
+> 5. [[Built-in Components]]
+> 6. [[Built-in APIs]]
+> 7. [[DOM]]
+
