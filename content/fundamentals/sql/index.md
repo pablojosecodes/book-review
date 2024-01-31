@@ -3,7 +3,7 @@ title: SQL
 ---
 `**Note: this section is under construction**`
 
-Welcome to my notes on `SQL`.  I felt I had a pretty good grasp on SQL (I  taught some sessions as my university club on SQL), but exploring it more rigorously was very fruitful.  
+Welcome to my notes on `SQL`.  I felt I had a pretty good grasp on SQL (I  taught some sessions at my university club on SQL), but exploring it more rigorously was very fruitful.  
 
 The book I used to learn this topic was [Learning SQL: Generate, Manipulate, and Retrieve Data](https://www.amazon.com/gp/product/1492057614/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1492057614&linkCode=as2&tag=snirsuggestin-20&linkId=549fcae1e30ab9fc60c5520189ea25d5).
 
