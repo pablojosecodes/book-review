@@ -161,6 +161,7 @@ There are a few approaches we can take
 2. Send requests to routing tier first (load balancer)
 	1. Routing tier determines node which should handle each request + forwards it to the node
 3. Make client aware of partitioning
+
 ![[Screenshot 2024-02-01 at 19.18.48.png]]
 
 But still: how do the components that make the routing decision actually learn about the changing assignmnets of partitions to nodes?
