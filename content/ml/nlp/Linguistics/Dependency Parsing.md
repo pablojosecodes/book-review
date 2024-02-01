@@ -8,12 +8,15 @@ Constituency = phrase structure grammar = context-free grammar (throwback)
 
 **Phrase structure**- organize words into nested constituents
 - Words → phrases → bigger phrases
+
 Example definiions of phrases
 - Define a noun phrase  NP = det (adj)$^*$ N (PP)$^*$
 - Same for PP → P NP
+
 **Contrast with dependency structure**
 - what modifies/depends on what?
 - Represent with arrows
+
 **Why do we need this anyhow?** 
 - Human language is complex, represent abstract concepts + complicated things with combninations of words
 - Ambiguity 
@@ -31,6 +34,7 @@ Example definiions of phrases
 
 
 **Dependency Structure**
+
 Parse trees in NLP
 - Use to analye syntactic structure of sentences
 
@@ -48,6 +52,7 @@ Dependencies: the binary asymmetric relations (Often arranged in a tree tructure
 	- Evaluation method
 
 **Dependency conditioning** 
+
 Good sources of info for dependency parsing
 - Bilexical affinities
 - Dependency ditance
@@ -56,6 +61,7 @@ Good sources of info for dependency parsing
 
 
 **Dependency parsing**
+
 Goal: mapping from input sentence with words $S = w_0w_1\ldots w_n$ to its dependency tree graph $G$
 
 Constraints (usually):
@@ -82,11 +88,13 @@ Typical methods of dependency parsing
 2. **Parsing**: Given a parsing model M and sentence S, derive the optimal dependency graph D for S according to M.
 
 **Transition based dependency parsing**
+
 *Key idea*: Use state machine which defines possible transitions
 - The larning problem: induce model 
 - The parsing problem: construct optimal equnce of tranitions, given previously induced model
 
 **Greedy deterministic tranition based parsing**
+
 Transition system
 - state machine (states + transitions)
 
@@ -100,10 +108,12 @@ Transition system
 3. Dependency arcs set $A$ of the form $(w_i, r, w_j)$ 
 	1. w: word
 	2. r: relation
+
 For any sentenec
 1. Initial state $c_0$ is of the form $([w_0]_\sigma, [w_1,\ldots , w_n]\beta, \emptyset)$
 	1. Only the root is on the stack $\sigma$
 2. Terminal state has form $(\sigma, []_\beta, A)$
+
 Transition type between states
 1. SHIFT: Move first word in the buffer to top of the stack
 	1. Precondition: buffer nonempty
@@ -117,16 +127,20 @@ Think about example sequence
 
 **Key question** how do you choose the next action?
 - Not clear what dependency arc to assign, or when to shift instead
+
 **Answer** use a dicriminative classifier (e.g. softmax)
 
 In simplest form, no search
 - VERY fast, linear time
 
 **Greedy Transition-based Neural Dependency Parsing**
+
 **Goal of model**: predict transition sequence from some intiial configuration to a terimnal configuration
 Since greedy
 - Tries to predict one transition at a time, based on features from current configuration
+
 **Feature selection**
+
 What should the input to neural network be?
 
 
@@ -139,7 +153,7 @@ Generally features for a given sentence S are some subset of
 
 
 *Conventional feature selection*
-- Cateogrical indicator features: use a bunch of feature temapltes and fill out a binary, sparse vector
+- Categorical indicator features: use a bunch of feature temapltes and fill out a binary, sparse vector
 - Not efficient at all!
 
 Instead, learn a dense + compact feature representation

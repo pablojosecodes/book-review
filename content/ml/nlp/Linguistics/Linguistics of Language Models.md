@@ -6,6 +6,7 @@ title: Linguistics of Langauge Models
 
 Underlying structure in language (rememebr dependency parsing)
 - Dictates the rules of language
+
 Implictly, we know complex rules
 
 **Grammar**: attempt to descrbe all these rules
@@ -30,6 +31,7 @@ Now, we don’t constrain our systems to know any syntax
 Question:
 - In human: syntactic structures exist indepdnetnly of words they have appeared with (e..g jabberwocky)
 - True for langauge models?
+
 Tested with COGS Benchmark: new word-structure combinations
 - Task: semantic inerpretation
 - Training / test sets have distinct words + structures in diff. roles
@@ -42,11 +44,13 @@ Can test a whole bunch of other stuff in language models
 # Going Beyond Pure Structure
 Semantics matters a ton! Impacts the rules of language
 - This is how we train language models! Embeddings
+
 Meaning isn’t allways just individual words, though
 - e.g. idioms, constructions
 - Can test in langauge models (via acceptability)
 # Multilinguality
 Multilingual language models let us share parameters (high and low resource languages)
+
 Key ideas
 - **Language typology**- lots of diversity
 	- Evidentiality

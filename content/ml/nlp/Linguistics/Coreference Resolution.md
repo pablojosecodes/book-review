@@ -27,6 +27,7 @@ Mention detection
 
 Marking all of the 3 types over-generates mentions
 - Example: “It is sunny”- it isn’t a mention
+
 How to deal with these bad mentions
 - Naive: classifier filter out 
 - More common: keep mentions as candidate mentions
@@ -44,6 +45,7 @@ Some linguisitics
 
 
 **Rule-based (Hobbs)- pronomial anaphora resolution**
+
 Messy naive algorithm that worked very long
 1. Begin at NP immediately dominating pronoun
 2. Go up tree to first NP or S. Call this X, and the path p.
@@ -61,6 +63,7 @@ Wino-grad schema: knowledge-based proomial coreference
 
 
 **Mention pair coreference models**
+
 Train binary classifier which assigned each pair- probability of being coreferent $p(m_i, m_j)$
 - e.g. given “she” look at all candidate antecedents
 
@@ -79,6 +82,7 @@ Cons
 - Solution: mention ranking- predict only one antecedent / mention
 
 **Mention-pair and mention-ranking models**
+
 Idea: assign eaeh mention highest scoring candidate antecedent according to model
 - Use dummy “NA” mention to decline linking to anything
 
@@ -96,6 +100,7 @@ But, how to compute probabilities?
 3. More advanced model using LSTMs, attention, transformers
 
 **(1) Non-neural coref model**
+
 Features
 - Person/number//gender agreement
 - Semantic Compatibility
@@ -106,13 +111,15 @@ Features
 - $\ldots$
 
 **(2) Neural coref model**
+
 Standard FFNN
 - Input: word embeddings + categorical features
 	- Embeddings: prev two words, first word,last word, head word, of each mention
 	- Other feautres: ditance, document genre, speaker info
 
 (3) End-to-end model
-Improvmenets
+
+Improvements
 - LSTM
 - Attention
 - Mention detection + coreference end-to-end
@@ -143,6 +150,7 @@ Steps
 		4. Do they look coreferent?
 
 **Transformer-based coref (now SOTA)**
+ 
  Can learn long-distance dependencies
 - (Idea 1) SpanBERT: pretrain BERT to be better at spna-based prediction task
  - (Idea 2) BERT-QA: treat Coreference like QA task

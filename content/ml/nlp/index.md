@@ -34,8 +34,8 @@ I've divided the content into the following sections
 	- [[Constituency Parsing]]: Analyzing the hierarchical structure of sentences into nested syntactic components
 	- [[Coreference Resolution]]: 
 	- [[ml/nlp/Linguistics/Linguistics of Language Models|Linguistics of Language Models]]: What do language models know about linguistics? How can we find out?
-1. [[index 1|Architectures]]: which architectures are most useful for nlp tasks?
-	- [[RNNs]]: recurrent models like LSTMs, GRU, etc.
+1. [[ml/nlp/index 1|Architectures]]: which architectures are most useful for nlp tasks?
+	- [[ml/nlp/Architectures/RNNs]]: recurrent models like LSTMs, GRU, etc.
 	- [[ConvNets + TRNNs]]
 	- [[Attention + Transformer]]: How can we apply attention and the transformer architecture to natural language tasks?
 	- [[Pretraining]]: everything you’ve ever wanted to know about pretraining language models

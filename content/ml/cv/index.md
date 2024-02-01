@@ -1,40 +1,36 @@
 ---
 title: Computer Vision
 ---
+Welcome to my notes on `computer vision`.
 
-Welcome to my notes on `computer vision`. I first became interested in this topic 
-
-The book I used to learn this topic was [High-Performance Browser Networking by Ilya Grigorik]()- I also supplemented with some material from [here]() and [here]().
+Content I used to learn this material: [Stanford’s CS231N (2023)](http://cs231n.stanford.edu/), [relevant lectures from efficientml.ai (2023)](https://efficientml.ai/), and [UMichs’s EECS 498 (2022)](https://web.eecs.umich.edu/~justincj/teaching/eecs498/WI2022/)
 
 ## the why and what
 
 Before we dive into `computer vision`, let's understand why you should care about it in the first place.
 
-`computer vision` is a _.
-
-It's useful for 
-- Thing #1
-- Thing #2
-- Thing #3
-
+`computer vision` 
 ## things you can do with this
 
 If you're anything like me, you'd love to learn this for no reason- but it's good to know what skills you can expect to learn with this content.go
-
-With the maerial in these pages you should be able to build
-- A flying car or something equally as fun
-- Tweets with 128 characters
-
-Here's some stuff I've directly used this content to build
-- Link 1
-- Link 2
-
-
 ## the content
 
 I'd recommend reading in order of the files, but I've tried to make the information as atomic as possible- enjoy!
 
-1. [[/1|Section 1]] useful for this that and the other
-2. [[/1|Section 1]] useful for this that and the other
-3. [[/1|Section 1]] useful for this that and the other
-4. [[/1|Section 1]] useful for this that and the other
+[[Architectures]]
+1. [[Linear Image Classifiers]]
+2. [[CNN Fundamentals]]
+3. [[CNN History]]
+4. [[ml/nlp/Architectures/RNNs|RNNs]]
+5. [[Transformers]]
+
+[[Applications]]
+1. [[Semantic Segmentation]]
+2. [[Object Detection]] 
+3. [[Instance Segmentation]] 
+4. [[3D]]
+5. [[Video Understanding]]
+6. [[Visualization and understanding]]
+7. [[Self-Supervised Learning]]
+8. [[Generative Models]]
+
