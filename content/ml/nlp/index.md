@@ -1,5 +1,5 @@
 ---
-title: Linguistics of Language Models
+title: Natural Language Processing
 ---
 
 Welcome to my notes on `Natural Language Processing`.
