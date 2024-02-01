@@ -1,5 +1,5 @@
 ---
-title: Welcome to Pablo's Book Notes
+title: Welcome to Pablo's Reference Notes
 ---
 
 Welcome to the website where I store my reference notes for some books I've read / topics I'm learning about. 
@@ -13,20 +13,17 @@ If you're using any of these notes as reference material (sweet!), then do consi
 2. [[/fundamentals/auth|Authentication (Feb 2024)]]: all about identity managemenet, auth, and implementation strategies
 3. [[/fundamentals/sql|SQL (Feb 2024)]]: using SQL efficiently
 4. [[/fundamentals/networking|Browser Networking (Feb 2024)]]: networking, transport/application protocols, browser APIs
-
-
 ## Frontend / Javascript
 1. [[/frontend/ts|Typescript (Jan 2024)]]: strongly typed language which builds on JavaScript
 2. [[/frontend/react|React (Jan 2024)]]: extremely popular JavaScript library for building UIs
 3. [[/frontend/next|NextJS (Dec 2023)]]: React framework for building full-stack web apps
-
-
 ## Machine Learning
 1. [[/ml/ml|Modern DL Fundamentals (Dec 2023)]]: core, shared deep learning concepts
 2. [[/ml/cv|Computer Vision (Dec 2023)]]: modern computer vision
 3. [[/ml/nlp|Natural Language Processing (Dec 203)]]: NLP!
 4. [[/ml/rl|Reinforcement Learning (Dec 2023)]]: reinforcement learning
 4. [[/ml/cuda|CUDA (Feb 2024)]]: programming gpus
-
 ## Entrepeneurship
 1. [[/customer-research|Customer Research (brief)]]
+
+## Frontend / Javascript
