@@ -1,6 +1,7 @@
 ---
 title: Welcome to Pablo's Reference Notes
 ---
+> Quick note: this is all an active work in progress! I’ve only started putting notes here towards the end of January 2024, so this is all (as to be expected) a bit unorganized. It should be more legible / curated by the end of February
 
 Welcome to the website where I store my reference notes for some books I've read / topics I'm learning about. 
 
@@ -9,20 +10,20 @@ My typical process is as follows: read book -> write notes -> apply -> synthesiz
 If you're using any of these notes as reference material (sweet!), then do consider implementing relevant projects- that's the best way to cement your learnings. I've included relevant projects I've done as well as other sample projects/use cases for each of these categories.
 
 ## Fundamentals
-1. [[/fundamentals/ddia|Designing Data Intensive Applications (Jan 2024)]]: rundown of the famous book
-2. [[/fundamentals/auth|Authentication (Feb 2024)]]: all about identity managemenet, auth, and implementation strategies
-3. [[/fundamentals/sql|SQL (Feb 2024)]]: using SQL efficiently
-4. [[/fundamentals/networking|Browser Networking (Feb 2024)]]: networking, transport/application protocols, browser APIs
+1. [[/fundamentals/ddia|Designing Data Intensive Applications]]: rundown of the famous book
+2. [[/fundamentals/auth|Authentication]]: all about identity managemenet, auth, and implementation strategies
+3. [[/fundamentals/sql|SQL]]: using SQL efficiently
+4. [[/fundamentals/networking|Browser Networking]]: networking, transport/application protocols, browser APIs
 ## Frontend / Javascript
-1. [[/frontend/ts|Typescript (Jan 2024)]]: strongly typed language which builds on JavaScript
-2. [[/frontend/react|React (Jan 2024)]]: extremely popular JavaScript library for building UIs
-3. [[/frontend/next|NextJS (Dec 2023)]]: React framework for building full-stack web apps
+1. [[/frontend/ts|Typescript]]: strongly typed language which builds on JavaScript
+2. [[/frontend/react|React]]: extremely popular JavaScript library for building UIs
+3. [[/frontend/next|NextJS]]: React framework for building full-stack web apps
 ## Machine Learning
-1. [[/ml/ml|Modern DL Fundamentals (Dec 2023)]]: core, shared deep learning concepts
-2. [[/ml/cv|Computer Vision (Dec 2023)]]: modern computer vision
-3. [[/ml/nlp|Natural Language Processing (Dec 203)]]: NLP!
-4. [[/ml/rl|Reinforcement Learning (Dec 2023)]]: reinforcement learning
-4. [[/ml/cuda|CUDA (Feb 2024)]]: programming gpus
+1. [[/ml/ml|Modern DL Fundamentals ]]: core, shared deep learning concepts
+2. [[/ml/cv|Computer Vision]]: modern computer vision
+3. [[/ml/nlp|Natural Language Processing]]: NLP!
+4. [[/ml/rl|Reinforcement Learning ]]: reinforcement learning
+4. [[/ml/cuda|CUDA]]: programming gpus
 ## Entrepeneurship
 1. [[/customer-research|Customer Research (brief)]]
 
