@@ -66,12 +66,40 @@ What should you do if you end up with a highly skewed workload? (e.g. a celebrit
 Sadly, modern databases typically can’t account for massive skewing, so you’ll have to handle it in your application
 
 # Partitioning and Secondary Indexes
-
-
 > Remember: secondary indexes 
 
-TODO
+But how do we partition data when we have secondary indexes?, which don’t usually identify records uniquely.
 
+2 main approaches to partitioning a database with secondary indexes
+- Document-based
+- Term-based
+
+## Partitioning Secondary Indexes by Document
+
+Example scenario: 
+- Website for selling used cars
+- You’ve partitioned database by unique Document ID
+- You want to let users filter by color and make, so you need a secondary index on color nad make
+
+The document-based approach
+- Separate (local index) secondary index for each partition
+- Secondary index maps field (ie. color) to the unique Document ID
+
+Con
+- You’ll have to query all partitions if you want to search for specific color or make (unless you’ve done something special in the set up)
+> 
+> Note: this approach to querying partitioned database is sometimes referred to as *scatter/gather*
+## Partitioning Secondary Indexes by Term
+The term-based approach
+- A global index which covers data in all partitions
+- This index must be partitioned
+	- Can use hash or term itself
+
+Pros
+- More efficient reads (no need for scatter/gather)
+
+Cons
+- Writes are slower
 
 # Rebalancing Partitions
 
@@ -121,4 +149,38 @@ Generally, it is good to have a human in the loop for rebalancing
 
 
 # Request Routing
-TODO
+
+We have now: parittionined our dataset across nodes across machines
+
+But, how does client know which node to connect to? The nodes which partitions are assigned to is constantly changing
+
+There are a few approaches we can take
+1. Let client contact any node (node intermediary)
+	1. If node owns partition, it handles the request
+	2. Else, passes along request to appropriate node and passes back reply
+2. Send requests to routing tier first (load balancer)
+	1. Routing tier determines node which should handle each request + forwards it to the node
+3. Make client aware of partitioning
+![[Screenshot 2024-02-01 at 19.18.48.png]]
+
+But still: how do the components that make the routing decision actually learn about the changing assignmnets of partitions to nodes?
+1. Separate coordination system (e.g. Zookeeper)
+	1. Nodes register in ZooKeeper and ZooKeeper maintains mapping
+	2. Routing tiers subscribe to info in ZooTier
+2. Gossip protocol
+
+# In sum
+
+Partitioning
+- Goal: spread data + query load evenly across machines, avoiding hot stpots
+- Necessary when: storing + proceessing data on single machine isn’t feasible
+
+2 main approaches
+- **Key Range Partitioning**
+- **Hash Partitioning**
+
+Partitioning and secondary index. Partitioning secondary indexes-
+- Document-partitioned indexes
+- Term-partitioned indexes
+
+Query routing
