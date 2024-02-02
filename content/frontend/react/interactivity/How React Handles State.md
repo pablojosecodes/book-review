@@ -1,8 +1,6 @@
 ---
 title: How React Handles State
 ---
-
-
 # Render and Commit
 Before components are displayed on the screen, they must be rendered by React
 

@@ -2,10 +2,10 @@
 title: Defining Events
 ---
 
-# Responding to events
+Events are an extremely important aspect of React to handle. They allow us to deal with and update our state bsed on user interactions. Event handlers are what allow us to actually deal with updates from events. 
 
-Event handlers: functions triggered in response to user interactions
-- Built-in components’s like `<button>` only support built-in browser-event slike `onclick`
+**Event handlers**: functions triggered in response to user interactions
+- Built-in components’s like `<button>` only support built-in browser-events like `onclick`
 - You can build your own event handlers
 - Name typically begins with “handle”
 

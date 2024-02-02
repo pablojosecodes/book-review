@@ -1,8 +1,6 @@
 ---
 title: State Update Operations
 ---
-
-
 # Queueing a Series of State Updates
 Sometims ou want to perform multiple operations in state before queueing the next render
 

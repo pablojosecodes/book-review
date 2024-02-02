@@ -36,3 +36,4 @@ The following sections will mostly deal with distributed shared-nothing architec
 > [!TOC]
 > 1. [[Replication|Replication]] 
 > 2. [[Partitioning|Partitioning]] 
+> 3. [[Transactions]]
