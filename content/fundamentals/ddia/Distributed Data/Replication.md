@@ -73,7 +73,7 @@ There are many things that can go wrong here. To name just a few-
 
 ### Replication Logs Implementation
 
-Until now, we’ve glossed over the actual implementation of leader-based replication logs. let’s look into the most common methods
+Until now, we’ve glossed over the actual implementation of leader-based replication logs. let’s look into the most common methods for replication logs
 
 #### **Statement-Based Replication**
 The most basic replication method. In it, the leader logs each write request (statement) as a log to its followers. (e.g. send `INSERT VALUE INTO ROW`).

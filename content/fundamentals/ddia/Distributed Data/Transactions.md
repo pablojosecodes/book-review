@@ -110,16 +110,49 @@ Thus, while systems try to hide concurrency issues from app developers via trans
 ## Read Committed
 
 This is the most basic level of transaction isolation. It promises two things won’t occur:
-1. Dirty reads: seeing data which hasn’t been commited
-2. Dirty writes: overwrite data which hasn’t been commited
+1. Dirty reads: seeing data which hasn’t been committed
+2. Dirty writes: overwrite data which hasn’t been committed
 #### Dirty Reads
 Goal: make writes visible to others only when transaction commits
 - In multi object updates- prevents one aspect seeming updated while another isn’t (e.g. profile photo updates, name doesn’t)
-- In case of abortion- prevents you form reading data which is never commited!
+- In case of abortion- prevents you form reading data which is never committed!
 #### Dirty Writes
-Goal: prevent write from overwriting uncommited value
+Goal: prevent write from overwriting uncommitted value
 - In multi object updates- prevents conflicting values in table (e.g. two bids submitted at same time)
 - Does NOT prevent race conditions
 
-#### Implementing Read Commited
+#### Implementing Read Committed
+
+Preventing Dirty Writes: Use row level locks
+- Transaction must acquire a lock on object until transaction is committed
+
+Preventing dirty reads:
+- One option: use similar lock- require transaction to lock during reading
+	- However- this could cause long write transaction to stall a whole bunch of read-only transactions
+- More popular option: database remembers old committed value while transaction holds write lock- so reads read the old value if object is locked
+
+## Snapshot Isolation and Repeatable Read
+
+What could still go wrong with read committed isolation?
+- Nonrepeatable read / read skew: when transactions modify data between reads in a multi object transaction
+- When is this temporal inconsistency NOT acceptable?
+	- Backups
+	- Analytic queries / integrity checks
+
+How do we solve this?  **Snapshot isolation** is the most common solution
+- Core idea: each transaction reads from a consistent snapshot of the database
+
+#### Implementing Snapshot Isolation
+
+Use write locks to prevent dirty writes
+
+**Multi version concurrency control**: store several different committed version of object, since various transactions may need state from different points in time.
+
+How does this work?
+- Each row has
+	- `created_by` field: contains ID of transaction which inserted row
+	- `deleted_by` field: if marked for deletion, set to ID of transaction which requested
+- When is certain no transaction will want ot access the deleted data, garbage collection removes rows marked for deletion
+
+#### Visibility rules for observing consistent snapshot
 TODO
