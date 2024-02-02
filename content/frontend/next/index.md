@@ -34,7 +34,17 @@ Here's some stuff I've directly used this content to build
 
 I'd recommend reading in order of the files, but I've tried to make the information as atomic as possible- enjoy!
 
-1. [[/frontend/next/Intro to NextJS|Section 1]] a sweeping introduction to nextjs’s conventions and unique capabilities
-2. [[/1|Section 1]] useful for this that and the other
-3. [[/1|Section 1]] useful for this that and the other
-4. [[/1|Section 1]] useful for this that and the other
+**Building NextJS Apps**: conventions, features- everything you need to build on/in NextJS
+
+
+
+**NextJS API**: all the parts of the NextJS API
+
+
+
+**NextJS Architecture**: under the hood of NextJS
+
+
+
+
+
