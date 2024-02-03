@@ -11,7 +11,7 @@ There are a lot of potential issues in data systems
 
 How can we mitigate all these faults? Should we just give up?
 
-No! We can use the magic of **transactions** to simply these issues
+No! We can use the magic of **transactions** to simplify these issues
 
 A transaction is a mechanism for applicaitons to group relevant reads and writes into one bundle. This turns all the actions’ success into something which can be measured in a binary way. Either the transaction succeeded or it failed.
 
@@ -133,7 +133,7 @@ Preventing dirty reads:
 
 ## Snapshot Isolation and Repeatable Read
 
-What could still go wrong with read committed isolation?
+What could still go wrong with read-committed isolation?
 - Nonrepeatable read / read skew: when transactions modify data between reads in a multi object transaction
 - When is this temporal inconsistency NOT acceptable?
 	- Backups
@@ -152,7 +152,89 @@ How does this work?
 - Each row has
 	- `created_by` field: contains ID of transaction which inserted row
 	- `deleted_by` field: if marked for deletion, set to ID of transaction which requested
-- When is certain no transaction will want ot access the deleted data, garbage collection removes rows marked for deletion
+- When is certain no transaction will want to access the deleted data, garbage collection removes rows marked for deletion
 
 #### Visibility rules for observing consistent snapshot
-TODO
+
+How do you determine what objects are (in)visible? Based on Transaction IDs
+
+This is essential for presenting a consistent snapshot of the database. Here’s how it works
+1. Beginning at the start of transaction- database makes list of other transactions which are in progress at that time (these are ignored)
+2. All writes made by aborted transactions are ignored
+3. Writes made by transactions with later transaction ID are igored
+4. All other writes are visible
+
+So, an object is visible it
+- At time of reader’s transaction, transaction which created object already committed
+- Object is not marked for deletion or transaction which marked it had not committed when reader’s transaction started
+
+#### Indexes and snapshot isolation
+What about indexes in a multi-version database?
+- One option: index points to all versions of object
+	- Use index query to filter any object versions not visible to current transaction
+- Other option: append only / copy on write variant- doesn’t overwrite paes of tree when updated, but instead creates new copy of each modified page 
+	- Each write transaction = new B-Tree rot
+	- No need to filter based on transaction IDs- subsequent wites can’t moidify existing B-tree: only create new tree roots
+
+#### Repeatable Read and Naming Confusion
+Snapshot isolation has many names
+- Serializable: Oracle
+- Repeatable read: PostgreSQL and MySQL
+
+## Preventing Lost Updates
+We’ve discussed guaranteeing the quality of read-only transactions, but what about two concurrent transaction writes?
+
+This is called the **lost update** prolem
+- **Specific definition**: 
+	- Application reads value from database, writes back the modified value
+	- But another transaction concurrently read before the writing
+	- That first update would be lost
+- Examples: multiple users/transactions-
+	- Increment counter
+	- Local change to complex value
+	- Editing page
+
+Here are some solutions!
+
+#### Atomic write operations
+**The idea**: make writes irreducible
+
+**Implementation**: take exclusive lock on object (no other transactions can read) when its read until update is applied.
+- Another option: execute atomic operations on a single thread
+
+
+Here's how you can complete your notes based on the provided context:
+
+#### Atomic write operations
+**The idea**: Make writes irreducible
+
+**Implementation**: 
+- Take exclusive lock on the object when it's read so no other transaction can read it until the update is applied. This is sometimes known as cursor stability.
+- Another option: Execute atomic operations on a single thread.
+
+#### Explicit Locking
+**The idea**: Application explicitly locks objects which are going to be updated.
+
+**Implementation**:
+- Use specific database commands like `SELECT ... FOR UPDATE` to lock the rows that are going to be updated.
+- `FOR UPDATE` tells db to lock all rows returend by query
+
+#### Automatically detecting lost updates
+**The idea**: Parallel read-modify-write cycles and aborting + retrying when lost updates are detected.
+
+**Implementation**:
+-  Use snapshot isolation to make this efficient
+
+#### Compare-and-set
+**The idea**: Only allow updates if value hasn’t changed since you last red it.
+
+**Implementation**:
+- Note: Ensure the update is retried if not allowed to update
+
+#### Conflict Resolution and Replication
+**The idea**: In replicated databases, this can get quite a bit more complex. Locks and compare-and-set assume a single up-to-date copy. Instead, typical approach is to allow for siblings and use applicatoin code / data structures to merge versions after hte fact
+
+**Implementation**:
+- Allow concurrent writes to create conflicting versions of a value (siblings) and then resolve and merge these versions after the fact.
+
+## Write Skew and Phantoms

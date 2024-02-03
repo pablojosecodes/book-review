@@ -35,6 +35,5 @@ Here's some stuff I've directly used this content to build
 I'd recommend reading in order of the files, but I've tried to make the information as atomic as possible- enjoy!
 
 1. [[fundamentals/networking/networking 101/index|Networking 101]] useful for this that and the other
-2. [[/1|Section 1]] useful for this that and the other
-3. [[/1|Section 1]] useful for this that and the other
-4. [[/1|Section 1]] useful for this that and the other
+2. [[fundamentals/networking/performance of wireless networks/index|Performance of Wireless Networks]] useful for this that and the other
+3. 

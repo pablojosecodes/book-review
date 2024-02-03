@@ -33,6 +33,7 @@ With the materials in these pages, you should be able to build:
 I'd recommend reading in order of the TOC, but I've tried to make the information as atomic as possible- enjoy!
 
 
+
 > [!Contents]
 > 1. [[frontend/react/interactivity/index|Interactivity]] 
 > 	 1. [[Defining Events]]
