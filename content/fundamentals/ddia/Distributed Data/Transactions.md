@@ -238,3 +238,43 @@ Here's how you can complete your notes based on the provided context:
 - Allow concurrent writes to create conflicting versions of a value (siblings) and then resolve and merge these versions after the fact.
 
 ## Write Skew and Phantoms
+We saw 2 race condition types which occur when transactoins currently write to same objects: *dirty writes* and *lost updates*.
+
+But, there are subtler examples of conflicts
+
+Imagine: must have at least one doctor on call- 2 on duty doctors check out at exact same time
+
+#### Characterizing Write Skew
+Ths is called **write skew**- isn’t a dirty write nor a lost update (two transactions are updating tow different objects)
+
+Generalization of lost update problem
+
+How to fix?
+- Atomic single object ops don’t help
+- Automatic lost update detection doesn’t help either
+- Some databases allow constraints
+- If you can’t use a serializable isolation level, the second-best option in this case is probably to explicitly lock the rows that the transaction depends on
+
+
+#### More examples of write skew
+- Meeting room booking
+	- Trying to avoid double booking
+- Multiplayer game
+	- Avoid multiple players moving figure at same time
+- Username claiming
+- Preventing double spending
+
+#### Phantoms causing write skew
+All of these examples follow a similar pattern:
+1. SELECT query checks whether some requirement is satisfied by searching for rows that match some search condition
+2. Application code decides how to continue
+3. If the application decides to go ahead, it makes a write
+
+#### Materializing conflicts
+
+If the problem of phantoms is that there is no object to which we can attach the locks, perhaps we can artificially introduce a lock object into the database?
+For example, in the meeting room booking case you could imagine creating a table of time slots and rooms. Each row in this table corresponds to a particular room for a particular time period (say, 15 minutes). You create rows for all possible combina‐ tions of rooms and time periods ahead of time, e.g. for the next six months.
+Now a transaction that wants to create a booking can lock (SELECT FOR UPDATE) the rows in the table that correspond to the desired room and time period. After it has acquired the locks, it can check for overlapping bookings and insert a new booking as before. Note that the additional table isn’t used to store information about the book‐ ing—it’s purely a collection of locks which is used to prevent bookings on the same room and time range from being modified concurrently.
+This approach is called materializing conflicts, because it takes a phantom and turns it into a lock conflict on a concrete set of rows that exist in the database [11]. Unfortu‐ nately, it can be hard and error-prone to figure out how to materialize conflicts, and it’s ugly to let a concurrency control mechanism leak into the application data model. For those reasons, materializing conflicts should be considered a last resort if no alternative is possible. A serializable isolation level is much preferable in most cases.
+
+# Serializability

@@ -14,10 +14,14 @@ If you're using any of these notes as reference material (sweet!), then do consi
 2. [[/fundamentals/auth|Authentication]]: all about identity managemenet, auth, and implementation strategies
 3. [[/fundamentals/sql|SQL]]: using SQL efficiently
 4. [[/fundamentals/networking|Browser Networking]]: networking, transport/application protocols, browser APIs
-## Frontend / Javascript
-1. [[/frontend/ts|Typescript]]: strongly typed language which builds on JavaScript
-2. [[/frontend/react|React]]: extremely popular JavaScript library for building UIs
-3. [[/frontend/next|NextJS]]: React framework for building full-stack web apps
+## Languages
+1. [[languages/ts/index|Typescript]]: strongly typed language which builds on JavaScript
+2. [[languages/python/index|Python3.12]] general purpose dynamically typed language
+
+## Frameworks
+1. [[frameworks/react/index|React]]: extremely popular JavaScript library for building UIs
+2. [[frameworks/next/index|NextJS]]: React framework for building full-stack web apps
+
 ## Machine Learning
 1. [[/ml/ml|Modern DL Fundamentals ]]: core, shared deep learning concepts
 2. [[/ml/cv|Computer Vision]]: modern computer vision
