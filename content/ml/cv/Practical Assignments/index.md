@@ -29,7 +29,7 @@ In the panoramic landscape of modern technology, computer vision is drawing insp
 3. PyTorch Sequential API: `nn.Sequential`
 
 Applications / Advanced Architectures
-- Image captioning with RNNs
-- Image captioning with Transformers
-- GANs
-- Self Supervised Image Classification
+- [[Image captioning with RNNs]]
+- [[Image captioning with Transformers]]
+- [[GANs]]
+- [[Self Supervised Image Classification]]
