@@ -5,7 +5,7 @@ title: Classifiers
 
 # K Nearest Neighbors
 
-Compute distance 
+#### Create a KNN distance computation according to these specs 
 
 ```python
 def compute_distance(self, X):
@@ -25,27 +25,27 @@ def compute_distance(self, X):
 
 ```
 
-Answer
+#### Answer
 ```python
 def compute_distance(self, X):
 	num_test = X.shape[0]
 	num_train = self.X_train.shape[0]
 	dists = np.zeros((num_test, num_train))
 	dists = np.sqrt(
-          -2 * (X @ self.X_train.T) +
-	np.power(X, 2).sum(axis=1, keepdims=True) +
-	np.power(self.X_train, 2).sum(axis=1, keepdims=True).T
+		-2 * (X @ self.X_train.T) +
+		np.power(X, 2).sum(axis=1, keepdims=True) +
+		np.power(self.X_train, 2).sum(axis=1, keepdims=True).T
 	)
 	return dists
 ```
 
-Implement cross validation with the following parameters
+####  Implement cross validation with the following parameters
 ```python
 num_folds = 5
 k_choices = [1, 3, 5, 8, 10, 12, 15, 20, 50, 100]
 ```
-Answer
 
+#### Answer
 ```python
 num_folds = 5
 k_choices = [1, 3, 5, 8, 10, 12, 15, 20, 50, 100]
@@ -89,8 +89,7 @@ for k in sorted(k_to_accuracies):
 
 # Support Vector Machine Classsifier
 
-
-Calculate the SVM gradient and loss according to specs
+####  Calculate the SVM gradient and loss according to specs
 ```python
 def svm_loss(W, X, y, reg):
     """
@@ -112,7 +111,7 @@ def svm_loss(W, X, y, reg):
     """
 ```
 
-Answer
+#### Answer
 ```python
 def svm_loss(W, X, y, reg):
 
@@ -133,7 +132,7 @@ def svm_loss(W, X, y, reg):
     return loss, dW
 ```
 
-Given the above loss function, calculate training with sgd according to the  specs
+####  Given the above loss function, calculate training with sgd according to these specs
 ```python
 def train(
 	self,
@@ -164,7 +163,7 @@ def train(
 	"""
 ```
 
-Answer
+#### Answer
 ```python
     def train(
         self,
@@ -211,13 +210,370 @@ Answer
 
 # Softmax Classifer
 
+#### Implement gradient and loss for softmax classifier given these specs
+```python
+def softmax_loss(W, X, y, reg):
+    """
+    Softmax loss function
 
-- Multilayer Neural Network
+    Inputs have dimension D, there are C classes, and we operate on minibatches
+    of N examples.
+
+    Inputs:
+    - W: A numpy array of shape (D, C) containing weights.
+    - X: A numpy array of shape (N, D) containing a minibatch of data.
+    - y: A numpy array of shape (N,) containing training labels; y[i] = c means
+      that X[i] has label c, where 0 <= c < C.
+    - reg: (float) regularization strength
+
+    Returns a tuple of:
+    - loss as single float
+    - gradient with respect to weights W; an array of same shape as W
+    """
+```
+
+Remember that the softmax function is essentially SVM with a different loss function and no hinge loss
+
+This means that you
+1. Get the raw outputs (logits)
+2. Normalize (subtract by max)
+3. Turn into exponents
+4. Get the softmax  values (softmax equation)
+
+Then, to get loss
+5. Get the loss from the softmax (negative log) for the index of what would be correct prediction
+6. Regularize + average
+
+To get gradient
+7. Update the correct classification (subtract 1)
+8. Calculate the gradient
+
+####  **Answer**
+```python
+def softmax_loss(W, X, y, reg):
+	loss = 0
+	dW = None
+	N = X.shape[0]
+
+	Y_hat = X @ W  # 1) raw scores matrix
+	P = Y_hat - Y_hat.max() # 2) normalize
+	P = np.exp(P)          # 3) Get exponent values 
+	P /= P.sum(axis=1, keepdims=True)    # 4) Get softmax values
+	loss = -np.log(P[range(N), y]).sum() # 5) Get loss from softmax
+	loss = loss / N + reg * np.sum(W**2) # 6) Avg. + regularize 
+	P[range(N), y] -= 1                  # 7) Update classification
+	dW = X.T @ P / N + 2 * reg * W       # 8) Get gradient
+	
+	return loss, dW
+```
 
 
-Convolutional architectures
-- Multilyaer Fuly Connected Networks
-	- 
 
-Specific Applications / Advanced Architctures
-- 
+
+# Fully Connected Neural Network
+
+
+#### Create an `affine_forward` function according to these specs
+```python
+def affine_forward(x, w, b):
+    """
+    Computes the forward pass for an affine (fully-connected) layer.
+
+    The input x has shape (N, d_1, ..., d_k) and contains a minibatch of N
+    examples, where each example x[i] has shape (d_1, ..., d_k). We will
+    reshape each input into a vector of dimension D = d_1 * ... * d_k, and
+    then transform it to an output vector of dimension M.
+
+    Inputs:
+    - x: A numpy array containing input data, of shape (N, d_1, ..., d_k)
+    - w: A numpy array of weights, of shape (D, M)
+    - b: A numpy array of biases, of shape (M,)
+
+    Returns a tuple of:
+    - out: output, of shape (N, M)
+    - cache: (x, w, b)
+    """
+```
+
+#### Answer
+```python
+def affine_forward(x, w, b):
+	out = None
+
+	x_reshaped = x.reshape(x.shape[0], -1)
+	out = x_reshaped @ w + b
+
+	cache = (x, w, b)
+	return out, cache
+```
+
+#### Create an `affine_backward` function according to these specs
+```python
+def affine_backward(dout, cache):
+    """
+    Computes the backward pass for an affine layer.
+
+    Inputs:
+    - dout: Upstream derivative, of shape (N, M)
+    - cache: Tuple of:
+      - x: Input data, of shape (N, d_1, ... d_k)
+      - w: Weights, of shape (D, M)
+      - b: Biases, of shape (M,)
+
+    Returns a tuple of:
+    - dx: Gradient with respect to x, of shape (N, d1, ..., d_k)
+    - dw: Gradient with respect to w, of shape (D, M)
+    - db: Gradient with respect to b, of shape (M,)
+    """
+```
+
+#### Answer
+```python
+def affine_backward(dout, cache):
+	x, w, b = cache
+
+    x_reshaped = x.reshape(x.shape[0], -1)
+    dx = (dout @ w.T).reshape(x.shape[0], *x.shape[1:])
+    dw = x_reshaped.T @ dout
+    db = dout.sum(axis=0)
+
+	return (dx, dw, db)
+```
+
+#### Create a `forward pass for ReLU` activation function according to these specs
+
+```python
+def relu_forward(x):
+    """
+    Computes the forward pass for a layer of rectified linear units (ReLUs).
+
+    Input:
+    - x: Inputs, of any shape
+
+    Returns a tuple of:
+    - out: Output, of the same shape as x
+    - cache: x
+    """
+```
+
+#### Answer
+```python
+def relu_forward(x):
+	cache = x
+	out = np.maximum(x, 0)
+	return (out, cache)
+```
+
+#### Create a `backward pass for ReLU` activation function according to these specs
+```python
+def relu_backward(dout, cache):
+    """
+    Computes the backward pass for a layer of rectified linear units (ReLUs).
+
+    Input:
+    - dout: Upstream derivatives, of any shape
+    - cache: Input x, of same shape as dout
+
+    Returns:
+    - dx: Gradient with respect to x
+    """
+```
+#### Answer
+```python
+def relu_backward(dout, cache):
+    dx, x = None, cache
+    dx = dout * (x > 0)
+    return dx
+```
+
+
+#### Implement `svm_loss` according to these specs
+```python
+def svm_loss(x, y):
+    """
+    Computes the loss and gradient using for multiclass SVM classification.
+
+    Inputs:
+    - x: Input data, of shape (N, C) where x[i, j] is the score for the jth
+      class for the ith input.
+    - y: Vector of labels, of shape (N,) where y[i] is the label for x[i] and
+      0 <= y[i] < C
+
+    Returns a tuple of:
+    - loss: Scalar giving the loss
+    - dx: Gradient of the loss with respect to x
+    """
+
+```
+
+#### Answer
+```python
+def svm_loss(x, y):
+    loss, dx = None, None
+
+    N = len(y)                                # number of samples
+    x_true = x[range(N), y][:, None]          # scores for true labels
+    margins = np.maximum(0, x - x_true + 1)   # margin for each score
+    loss = margins.sum() / N - 1
+    dx = (margins > 0).astype(float) / N
+    dx[range(N), y] -= dx.sum(axis=1)
+
+    return loss, dx
+```
+
+
+
+#### Implement `softmax_loss` according to these specs
+```python
+def softmax_loss(x, y):
+    """
+    Computes the loss and gradient for softmax classification.
+
+    Inputs:
+    - x: Input data, of shape (N, C) where x[i, j] is the score for the jth
+      class for the ith input.
+    - y: Vector of labels, of shape (N,) where y[i] is the label for x[i] and
+      0 <= y[i] < C
+
+    Returns a tuple of:
+    - loss: Scalar giving the loss
+    - dx: Gradient of the loss with respect to x
+    """
+```
+
+#### Answer
+```python
+def softmax_loss(x, y):
+
+    loss, dx = None, None
+
+    N = len(y) # number of samples
+
+    P = np.exp(x - x.max(axis=1, keepdims=True)) # numerically stable exponents
+    P /= P.sum(axis=1, keepdims=True)            # row-wise probabilities (softmax)
+
+    loss = -np.log(P[range(N), y]).sum() / N # sum cross entropies as loss
+
+    P[range(N), y] -= 1
+    dx = P / N
+
+    return loss, dx
+```
+
+
+#### Build out a full Two Layer Neural Network according to these specs
+```python
+class TwoLayerNet(object):
+    """
+    A two-layer fully-connected neural network with ReLU nonlinearity and
+    softmax loss that uses a modular layer design. We assume an input dimension
+    of D, a hidden dimension of H, and perform classification over C classes.
+
+    The architecure should be affine - relu - affine - softmax.
+
+    Note that this class does not implement gradient descent; instead, it
+    will interact with a separate Solver object that is responsible for running
+    optimization.
+
+    The learnable parameters of the model are stored in the dictionary
+    self.params that maps parameter names to numpy arrays.
+    """
+
+    def __init__(
+        self,
+        input_dim=3 * 32 * 32,
+        hidden_dim=100,
+        num_classes=10,
+        weight_scale=1e-3,
+        reg=0.0,
+    ):
+        """
+        Initialize a new network.
+
+        Inputs:
+        - input_dim: An integer giving the size of the input
+        - hidden_dim: An integer giving the size of the hidden layer
+        - num_classes: An integer giving the number of classes to classify
+        - weight_scale: Scalar giving the standard deviation for random
+          initialization of the weights.
+        - reg: Scalar giving L2 regularization strength.
+        """
+
+
+    def loss(self, X, y=None):
+        """
+        Compute loss and gradient for a minibatch of data.
+
+        Inputs:
+        - X: Array of input data of shape (N, d_1, ..., d_k)
+        - y: Array of labels, of shape (N,). y[i] gives the label for X[i].
+
+        Returns:
+        If y is None, then run a test-time forward pass of the model and return:
+        - scores: Array of shape (N, C) giving classification scores, where
+          scores[i, c] is the classification score for X[i] and class c.
+
+        If y is not None, then run a training-time forward and backward pass and
+        return a tuple of:
+        - loss: Scalar value giving the loss
+        - grads: Dictionary with the same keys as self.params, mapping parameter
+          names to gradients of the loss with respect to those parameters.
+        """
+
+```
+
+#### Answer
+```python
+class TwoLayerNet(object):
+
+    def __init__(
+        self,
+        input_dim=3 * 32 * 32,
+        hidden_dim=100,
+        num_classes=10,
+        weight_scale=1e-3,
+        reg=0.0,
+    ):
+
+        self.params = {}
+        self.reg = reg
+
+        self.params = {
+          'W1': np.random.randn(input_dim, hidden_dim) * weight_scale,
+          'b1': np.zeros(hidden_dim),
+          'W2': np.random.randn(hidden_dim, num_classes) * weight_scale,
+          'b2': np.zeros(num_classes)
+        }
+
+
+    def loss(self, X, y=None):
+
+        scores = None
+
+        W1, b1, W2, b2 = self.params.values()
+
+        out1, cache1 = affine_forward(X, W1, b1)
+        out2, cache2 = relu_forward(out1)
+        scores, cache3 = affine_forward(out2, W2, b2)
+
+
+        if y is None:
+            return scores
+
+        loss, grads = 0, {}
+
+        
+        loss, dloss = softmax_loss(scores, y)
+        loss += 0.5 * self.reg * (np.sum(W1**2) + np.sum(W2**2))
+
+        dout3, dW2, db2 = affine_backward(dloss, cache3)
+        dout2 = relu_backward(dout3, cache2)
+        dout1, dW1, db1 = affine_backward(dout2, cache1)
+
+        dW1 += self.reg * W1
+        dW2 += self.reg * W2
+
+        grads = {'W1': dW1, 'b1': db1, 'W2': dW2, 'b2': db2}
+
+        return loss, grads
+```
