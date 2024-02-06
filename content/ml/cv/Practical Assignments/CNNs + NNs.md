@@ -1,3 +1,6 @@
+---
+title: CNNs + NNs
+---
 
 # Multi-layer FCN
  
@@ -58,6 +61,8 @@ class FullyConnectedNet(object):
         self.dtype = dtype
         self.params = {}
 
+		# YOUR CODE HERE
+
     
     def loss(self, X, y=None):
         """Compute loss and gradient for the fully connected net.
@@ -89,6 +94,7 @@ class FullyConnectedNet(object):
                 bn_param["mode"] = mode
         scores = None
 
+		# YOUR CODE HERE
 
         return loss, grads
 ```
@@ -1116,10 +1122,5 @@ def conv_forward_im2col(x, w, b, conv_param):
     return out, cache
 
 ```
-
-
-
-
-# Pytorch
 
 
