@@ -17,18 +17,18 @@ I’m heading back to SF a week from today! If you’re in the Bay, I would abso
 
 ## My Quarterly Forecast
 
-I think it’d be fun and constructive to structure part of this quarterly update as a corporation would: providing some more abstract version of profit and loss statements- as well as elucidate on projections missed / hit. Especially considering these emails will likely be the highest fidelity record of my goals/state of mind at various points in my early adult life.
+I think it’d be fun and constructive to structure part of this quarterly update as a corporation would: providing some more abstract version of profit and loss statements- as well as elucidate on previous projections I missed / hit. Especially considering these emails will likely be the highest fidelity record of my goals/state of mind at various points in my early adult life.
 
 So here are my quarterly projections (to be assesed by the start of Q2, in May)
 ### Academia
 
 **Projection**: 2 submitted papers
 - First on modifying attention heads for long-context NLP  tasks
-- Second on reinforcement learning techniques in multi
+- Second on new reinforcement learning techniques in language models
 **Current status**: 
-- Actively finishing up
+- Actively finishing up the first, specifically applied to peer reviews
+- FInishing up the second
 ### Projects
-
 **Projection**: 
 **Current status**: 
 ### Professional

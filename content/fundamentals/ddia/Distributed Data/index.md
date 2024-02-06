@@ -38,3 +38,4 @@ The following sections will mostly deal with distributed shared-nothing architec
 > 2. [[Partitioning|Partitioning]] 
 > 3. [[Transactions]]
 > 4. [[The Trouble with Distributed Systems]]
+> 5. [[Consistency and Consensus]]

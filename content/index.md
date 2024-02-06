@@ -9,6 +9,8 @@ My typical process is as follows: read book -> write notes -> apply -> synthesiz
 
 If you're using any of these notes as reference material (sweet!), then do consider implementing relevant projects- that's the best way to cement your learnings. I've included relevant projects I've done as well as other sample projects/use cases for each of these categories.
 
+I also feel the need to note that absolutey note of the content on this website was generated with the use of a large language model.
+
 ## Fundamentals
 1. [[/fundamentals/ddia|Designing Data Intensive Applications]]: rundown of the famous book
 2. [[/fundamentals/auth|Authentication]]: all about identity managemenet, auth, and implementation strategies

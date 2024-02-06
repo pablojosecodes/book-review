@@ -34,3 +34,6 @@ I'd recommend reading in order of the files, but I've tried to make the informat
 7. [[Self-Supervised Learning]]
 8. [[Generative Models]]
 
+Practical Assignments
+
+[[ml/cv/Practical Assignments/index|p]]
