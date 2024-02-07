@@ -62,12 +62,69 @@ function getOrComputeFileIndex(allFiles: QuartzPluginData[]): Map<FullSlug, Quar
   return pageIndex
 }
 
+const themingScript = `
+document.addEventListener('DOMContentLoaded', function() {
+  function applyLanguageTheme() {
+    const path = window.location.pathname;
+    console.log(path)
+    if (path.includes('languages')) {
+      console.log("INCLUDES")
+      // Define the colors for light and dark modes
+      const lightModeColors = {
+        light: "hsl(0, 0%, 100%)",       // Assuming --background corresponds to 'light'
+        lightgray: "hsl(20, 14.3%, 4.1%)", // Assuming --foreground corresponds to 'lightgray'
+        gray: "hsl(0, 0%, 100%)",         // Assuming --card corresponds to 'gray'
+        darkgray: "hsl(20, 14.3%, 4.1%)", // Assuming --card-foreground corresponds to 'darkgray'
+        dark: "hsl(60, 4.8%, 95.9%)",     // Assuming --secondary corresponds to 'dark'
+        secondary: "hsl(47.9, 95.8%, 53.1%)", // --primary
+        tertiary: "hsl(26, 83.3%, 14.1%)",    // --primary-foreground
+        highlight: "hsl(60, 4.8%, 95.9%)"   // Assuming --accent corresponds to 'highlight'
+    };
+
+      const darkModeColors = {
+        light: "hsl(20, 14.3%, 4.1%)",     // Assuming --background corresponds to 'light'
+        // lightgray: "hsl(60, 9.1%, 97.8%)", // Assuming --foreground corresponds to 'lightgray'
+        lightgray: "#404040",
+        gray: "hsl(20, 14.3%, 4.1%)",       // Assuming --card corresponds to 'gray'
+        darkgray: "hsl(60, 9.1%, 97.8%)",   // Assuming --card-foreground corresponds to 'darkgray'
+        // dark: "hsl(12, 6.5%, 15.1%)",       // Assuming --secondary corresponds to 'dark'
+        dark:"white",
+        secondary: "hsl(47.9, 95.8%, 53.1%)", // --primary
+        tertiary: "hsl(26, 83.3%, 14.1%)",    // --primary-foreground
+        highlight: "hsl(12, 6.5%, 15.1%)"   // Assuming --accent corresponds to 'highlight'
+    };
+    
+      // Function to apply colors
+      function setColors(colors) {
+        Object.keys(colors).forEach(key => {
+          document.documentElement.style.setProperty('--' + key, colors[key]);
+        });
+      }
+
+      // Check if dark mode is active and apply the corresponding colors
+      const savedTheme = document.documentElement.getAttribute('saved-theme') || 'light';
+      if (savedTheme === 'dark') {
+        setColors(darkModeColors);
+        console.log("SETTING DARK MODE COLORS")
+        console.log(darkModeColors)
+      } else {
+        console.log("SETTING LIGHT MODE COLORS")
+        setColors(lightModeColors);
+      }
+    }
+  }
+  applyLanguageTheme();
+});
+`;
+
+
 export function renderPage(
   slug: FullSlug,
   componentData: QuartzComponentProps,
   components: RenderComponents,
   pageResources: StaticResources,
 ): string {
+  // console.log("HI")
   // process transcludes in componentData
   visit(componentData.tree as Root, "element", (node, _index, _parent) => {
     if (node.tagName === "blockquote") {
@@ -96,6 +153,7 @@ export function renderPage(
             }
 
             node.children = [
+
               normalizeHastElement(blockNode, slug, transcludeTarget),
               {
                 type: "element",
@@ -193,6 +251,17 @@ export function renderPage(
     </div>
   )
 
+
+
+  const themingScriptElement = {
+    type: "element",
+    tagName: "script",
+    properties: {},
+    children: [{ type: "text", value: themingScript }],
+  };
+
+
+
   const doc = (
     <html>
       <Head {...componentData} />
@@ -216,10 +285,14 @@ export function renderPage(
               <Content {...componentData} />
             </div>
             {RightComponent}
+
           </Body>
           <Footer {...componentData} />
         </div>
+        <script dangerouslySetInnerHTML={{ __html: themingScript }}></script>
+
       </body>
+
       {pageResources.js
         .filter((resource) => resource.loadTime === "afterDOMReady")
         .map((res) => JSResourceToScriptElement(res))}

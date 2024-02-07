@@ -10,9 +10,8 @@ title: Classifiers
 ```python
 def compute_distance(self, X):
 	"""
-	Compute the distance between each test point in X and each training point
-	in self.X_train using a nested loop over both the training data and the
-	test data.
+	Compute the L2 distance between each test point in X and each training point
+	in self.X_train
 
 	Inputs:
 	- X: A numpy array of shape (num_test, D) containing test data.
@@ -22,30 +21,50 @@ def compute_distance(self, X):
 	  is the Euclidean distance between the ith test point and the jth training
 	  point.
 	"""
-
 ```
-
+---
 #### Answer
+
+1. Initialize distances
+2. Calculate the L2 distance $\sqrt{\sum{(x_i-y_i)^2}}$  keeping shapes/broadcasting in mind
+
 ```python
 def compute_distance(self, X):
-	num_test = X.shape[0]
+	num_test = X.shape[0] # 
 	num_train = self.X_train.shape[0]
-	dists = np.zeros((num_test, num_train))
+
+	# Initialze distances
+	dists = np.zeros((num_test, num_train)) 
+	
 	dists = np.sqrt(
-		-2 * (X @ self.X_train.T) +
+		# Matmul the two
+		-2 * (X @ self.X_train.T) + 
+
+		# Square (and keep dims for broadcasting)
 		np.power(X, 2).sum(axis=1, keepdims=True) +
-		np.power(self.X_train, 2).sum(axis=1, keepdims=True).T
+
+		# Square (and keep dims / transpose for broadcasting)
+		np.power(self.X_train, 2).sum(axis=1, keepdims=True).T 
 	)
 	return dists
 ```
 
+ 
 ####  Implement cross validation with the following parameters
 ```python
 num_folds = 5
 k_choices = [1, 3, 5, 8, 10, 12, 15, 20, 50, 100]
 ```
+---
 
 #### Answer
+
+1. Set up the folds
+2. Loop through choices
+	1. Loop through fold combinations (use `concatenate`, `compress`, and `arange` for the operation)
+	2. Train on the respective fold and store the accuracies
+
+
 ```python
 num_folds = 5
 k_choices = [1, 3, 5, 8, 10, 12, 15, 20, 50, 100]
@@ -53,9 +72,10 @@ k_choices = [1, 3, 5, 8, 10, 12, 15, 20, 50, 100]
 X_train_folds = []
 y_train_folds = []
 
-
+# np.array_split splits arrays into folds
 X_train_folds = np.array_split(X_train, num_folds)
 y_train_folds = np.array_split(y_train, num_folds)
+
 
 k_to_accuracies = {}
 
@@ -63,6 +83,7 @@ for k in k_choices:
     k_to_accuracies[k] = []
 
     for i in range(num_folds):
+    
         # Create num_folds-1 of the data and labels as the training samples 
         X_train_temp = np.concatenate(np.compress(np.arange(num_folds) != i, X_train_folds, axis=0))
         y_train_temp = np.concatenate(np.compress(np.arange(num_folds) != i, y_train_folds, axis=0))
@@ -77,8 +98,6 @@ for k in k_choices:
         num_correct = np.sum(y_pred_temp == y_train_folds[i])
         k_to_accuracies[k].append(num_correct / len(y_pred_temp))
 
-
-
 # Print out the computed accuracies
 for k in sorted(k_to_accuracies):
     for accuracy in k_to_accuracies[k]:
@@ -86,14 +105,14 @@ for k in sorted(k_to_accuracies):
 
 ```
 
-
+# Support Vector Machine Classsifier  #card 
 # Support Vector Machine Classsifier
 
 ####  Calculate the SVM gradient and loss according to specs
 ```python
 def svm_loss(W, X, y, reg):
     """
-    Structured SVM loss function, naive implementation (with loops).
+    Structured SVM loss function
 
     Inputs have dimension D, there are C classes, and we operate on minibatches
     of N examples.
@@ -111,12 +130,25 @@ def svm_loss(W, X, y, reg):
     """
 ```
 
+
 #### Answer
+
+1. Initialize loss and gradient
+2. Get the raw scores
+3. Compute the margins (distance with hinge- in this case hinge is 1)
+	1. Get list of predictions for correct position broadcasting (ensure that axes and whatnot are correct)
+	2. Calculate margins
+4. Get the total loss with regularization
+5. Calculate the gradient
+	1. Get matrix of 1/0s where gradient exists
+	2. Updte to incude correct labels (remember the equation)
+	3. Compute the gradient using this matrix
+
+
 ```python
 def svm_loss(W, X, y, reg):
-
     loss = 0.0
-    dW = np.zeros(W.shape)  # initialize the gradient as zero
+    dW = np.zeros(W.shape)  
 
     N = len(y)     # number of samples
     Y_hat = X @ W  # raw scores matrix
@@ -132,7 +164,7 @@ def svm_loss(W, X, y, reg):
     return loss, dW
 ```
 
-####  Given the above loss function, calculate training with sgd according to these specs
+#### Given the above loss function, calculate training with sgd according to these specs
 ```python
 def train(
 	self,
@@ -164,6 +196,14 @@ def train(
 ```
 
 #### Answer
+
+1. Initialize weights
+2. For each iteration
+	1. Get random indices
+	2. Computer loss and gradient
+	3. Append loss to history
+	4. Update weights with gradient
+
 ```python
     def train(
         self,
@@ -188,7 +228,8 @@ def train(
         for it in range(num_iters):
             X_batch = None
             y_batch = None
-
+            
+			# Samples from num_train (either np.arange(num_train) or itself if it's a list) batch_size samples
             indices = np.random.choice(num_train, batch_size)
             X_batch = X[indices]
             y_batch = y[indices]
@@ -255,14 +296,29 @@ def softmax_loss(W, X, y, reg):
 	dW = None
 	N = X.shape[0]
 
-	Y_hat = X @ W  # 1) raw scores matrix
-	P = Y_hat - Y_hat.max() # 2) normalize
-	P = np.exp(P)          # 3) Get exponent values 
-	P /= P.sum(axis=1, keepdims=True)    # 4) Get softmax values
-	loss = -np.log(P[range(N), y]).sum() # 5) Get loss from softmax
-	loss = loss / N + reg * np.sum(W**2) # 6) Avg. + regularize 
-	P[range(N), y] -= 1                  # 7) Update classification
-	dW = X.T @ P / N + 2 * reg * W       # 8) Get gradient
+	# 1) raw scores matrix
+	Y_hat = X @ W
+
+	# 2) normalize
+	P = Y_hat - Y_hat.max() 
+	
+	# 3) Get exponent values 
+	P = np.exp(P)          
+
+	# 4) Get softmax values
+	P /= P.sum(axis=1, keepdims=True)    
+	
+	# 5) Get loss from softmax
+	loss = -np.log(P[range(N), y]).sum() 
+
+	# 6) Avg. + regularize 
+	loss = loss / N + reg * np.sum(W**2) 
+
+	# 7) Update classification
+	P[range(N), y] -= 1                  
+
+	# 8) Get gradient
+	dW = X.T @ P / N + 2 * reg * W       
 	
 	return loss, dW
 ```
@@ -294,8 +350,11 @@ def affine_forward(x, w, b):
     - cache: (x, w, b)
     """
 ```
-
+---
 #### Answer
+
+1. Reshape the input
+2. Compute output
 ```python
 def affine_forward(x, w, b):
 	out = None
@@ -328,6 +387,12 @@ def affine_backward(dout, cache):
 ```
 
 #### Answer
+1. Reshape the input data
+2. Compute gradients
+	1. Input
+		1. 
+	2. Weight
+	3. Bias
 ```python
 def affine_backward(dout, cache):
 	x, w, b = cache
@@ -357,6 +422,8 @@ def relu_forward(x):
 ```
 
 #### Answer
+
+1. Calculate RELU
 ```python
 def relu_forward(x):
 	cache = x
@@ -379,6 +446,8 @@ def relu_backward(dout, cache):
     """
 ```
 #### Answer
+1. Calculate gradient
+
 ```python
 def relu_backward(dout, cache):
     dx, x = None, cache
@@ -407,6 +476,9 @@ def svm_loss(x, y):
 ```
 
 #### Answer
+
+
+
 ```python
 def svm_loss(x, y):
     loss, dx = None, None
