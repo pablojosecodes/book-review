@@ -17,6 +17,7 @@ First, though, let’s differentiate between two kinds of systems which store / 
 	- Often, denormalized
 
 
-
 > [!TOC]
 > [[Batch Processing]]
+> [[Stream Processing]]
+> [[Future of Data Systems]]
