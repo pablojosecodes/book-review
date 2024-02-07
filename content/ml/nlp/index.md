@@ -14,7 +14,6 @@ It's useful for
 - Building conversational interfaces
 - Analyzing/generating many varieties of text
 - Understanding linguistics from a new perspective
-- Getting your startup loads of vc money (TODO remove this haha)
 
 ## things you can do with this
 
