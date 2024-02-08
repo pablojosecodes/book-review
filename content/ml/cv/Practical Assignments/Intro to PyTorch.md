@@ -12,16 +12,19 @@ TODO good tutorials
 1. Barebones: low-level pytorch tensor
 2. PyTorch Module API: `nn.Module` to define arbitrary nn architectures
 3. PyTorch Sequential API: `nn.Sequential`
+
+
 ## 1: Barebones
 
 Pytorch has high-leve APIs, but for now let’s just use barebone PyTorch elemneets to undrstand autograd.
 
 First, let’s make a simple fully-connected ReLU network with 2 hidden layers and no biases. Let’s use PyTorch autograd to compute the tensors
 
+<!--card-->
 #### Flatten function
 Tensor is like a numpy array.
 
-Image data typically sotres in Tensor with shape N x C x H x W
+Image data is typically stored in Tensors with dimensions N x C x H x W
 - N: no. of datapoints
 - C: no. of channels
 - H: pixel height of intemediate feature map
@@ -35,7 +38,7 @@ def flatten(x):
     return x.view(N, -1)  # "flatten" the C * H * W values into a single vector per image
 ```
 
-#### barebone pytorch: Two-Layer network
+#### Barebone PyTorch: Two-Layer network
 
 Important to understand this implementation
 ```python
@@ -91,15 +94,14 @@ two_layer_fc_test()
 # torch.Size([64, 10])
 ```
 
-### Implement a 3-layer ConvNet with the following specification
+### Implement a 3-layer ConvNet with the following specification using `nn.Functional`
 
-Architecture
-1. A convolutional layer (with bias) with channel_1 filters, each with shape KW1 x KH1, and zero-padding of two
-2. ReLU nonlinearity
-3. A convolutional layer (with bias) with channel_2 filters, each with shape KW2 x KH2, and zero-padding of one
-4. ReLU nonlinearity
-5. Fully-connected layer with bias, producing scores for C classes.
-You can use `F.` building blocks
+**Architecture**
+1. Convolutional layer (with bias) with channel_1 filters, each with shape KW1 x KH1, and zero-padding of two
+2. ReLU
+3. Convolutional layer (with bias) with channel_2 filters, each with shape KW2 x KH2, and zero-padding of one
+4. ReLU
+5. FC with bias, producing scores for C classes.
 
 ```python
 def three_layer_convnet(x, params):
@@ -420,9 +422,10 @@ Architecture
 3. Convolutional layer (with bias) with 16 3x3 filters, with zero-padding of 1
 4. ReLU
 5. Fully-connected layer (with bias) to compute scores for 10 classes
-Default weight init
-Optimize with SGD with esterov momentum 0.9
 
+Default weight init
+
+Optimize with SGD with esterov momentum 0.9
 
 ```python
 channel_1 = 32
@@ -436,10 +439,13 @@ optimizer = None
 
 train_part34(model, optimizer)
 ```
-
+---
 ### Answer
 
+- Use `nn.Sequential` to construct architecture (also the above `Flatten()` function)
+- Use `optim.SGD` to construct optimizer
 
+---
 
 ```python
 channel_1 = 32

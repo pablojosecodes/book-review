@@ -17,7 +17,7 @@ In the panoramic landscape of modern technology, computer vision is drawing insp
 - Softmax Classifer
 - Multilayer Neural Network
 
-[[CNNs + NNs 2]] (numpy)
+[[CNNs + NNs]] (numpy)
 - Multil-layer Fully Connected Networks
 - Batchnorm
 - Dropout

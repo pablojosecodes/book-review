@@ -1,8 +1,6 @@
 ---
 title: Classifiers
 ---
-
-
 # K Nearest Neighbors
 
 #### Create a KNN distance computation according to these specs 
@@ -27,6 +25,8 @@ def compute_distance(self, X):
 
 1. Initialize distances
 2. Calculate the L2 distance $\sqrt{\sum{(x_i-y_i)^2}}$  keeping shapes/broadcasting in mind
+
+---
 
 ```python
 def compute_distance(self, X):
@@ -63,8 +63,7 @@ k_choices = [1, 3, 5, 8, 10, 12, 15, 20, 50, 100]
 2. Loop through choices
 	1. Loop through fold combinations (use `concatenate`, `compress`, and `arange` for the operation)
 	2. Train on the respective fold and store the accuracies
-
-
+---
 ```python
 num_folds = 5
 k_choices = [1, 3, 5, 8, 10, 12, 15, 20, 50, 100]
@@ -105,7 +104,7 @@ for k in sorted(k_to_accuracies):
 
 ```
 
-# Support Vector Machine Classsifier  #card 
+
 # Support Vector Machine Classsifier
 
 ####  Calculate the SVM gradient and loss according to specs
@@ -130,7 +129,7 @@ def svm_loss(W, X, y, reg):
     """
 ```
 
-
+---
 #### Answer
 
 1. Initialize loss and gradient
@@ -144,6 +143,7 @@ def svm_loss(W, X, y, reg):
 	2. Updte to incude correct labels (remember the equation)
 	3. Compute the gradient using this matrix
 
+---
 
 ```python
 def svm_loss(W, X, y, reg):
@@ -195,14 +195,15 @@ def train(
 	"""
 ```
 
+---
 #### Answer
-
 1. Initialize weights
 2. For each iteration
 	1. Get random indices
 	2. Computer loss and gradient
 	3. Append loss to history
 	4. Update weights with gradient
+---
 
 ```python
     def train(
@@ -273,6 +274,8 @@ def softmax_loss(W, X, y, reg):
     """
 ```
 
+---
+####  **Answer**
 Remember that the softmax function is essentially SVM with a different loss function and no hinge loss
 
 This means that you
@@ -289,7 +292,8 @@ To get gradient
 7. Update the correct classification (subtract 1)
 8. Calculate the gradient
 
-####  **Answer**
+---
+
 ```python
 def softmax_loss(W, X, y, reg):
 	loss = 0
@@ -328,7 +332,6 @@ def softmax_loss(W, X, y, reg):
 
 # Fully Connected Neural Network
 
-
 #### Create an `affine_forward` function according to these specs
 ```python
 def affine_forward(x, w, b):
@@ -352,9 +355,9 @@ def affine_forward(x, w, b):
 ```
 ---
 #### Answer
-
 1. Reshape the input
 2. Compute output
+---
 ```python
 def affine_forward(x, w, b):
 	out = None
@@ -365,6 +368,7 @@ def affine_forward(x, w, b):
 	cache = (x, w, b)
 	return out, cache
 ```
+
 
 #### Create an `affine_backward` function according to these specs
 ```python
@@ -385,14 +389,14 @@ def affine_backward(dout, cache):
     - db: Gradient with respect to b, of shape (M,)
     """
 ```
-
+---
 #### Answer
 1. Reshape the input data
 2. Compute gradients
 	1. Input
-		1. 
 	2. Weight
 	3. Bias
+---
 ```python
 def affine_backward(dout, cache):
 	x, w, b = cache
@@ -420,10 +424,10 @@ def relu_forward(x):
     - cache: x
     """
 ```
-
+---
 #### Answer
-
 1. Calculate RELU
+---
 ```python
 def relu_forward(x):
 	cache = x
@@ -445,9 +449,10 @@ def relu_backward(dout, cache):
     - dx: Gradient with respect to x
     """
 ```
+---
 #### Answer
 1. Calculate gradient
-
+---
 ```python
 def relu_backward(dout, cache):
     dx, x = None, cache
@@ -472,12 +477,16 @@ def svm_loss(x, y):
     - loss: Scalar giving the loss
     - dx: Gradient of the loss with respect to x
     """
-
 ```
-
+---
 #### Answer
 
-
+1. Get the probabilities assigned to the correct predictions (ensure the shape is correct for broadcasting)
+2. Calculate the margins
+3. Use margins to calculate loss
+4. Calculate the gradient of loss wrt x (remember the SVM loss equation)
+	1. Remember how to calculate the correct index’s equation
+---
 
 ```python
 def svm_loss(x, y):
@@ -512,9 +521,18 @@ def softmax_loss(x, y):
     - dx: Gradient of the loss with respect to x
     """
 ```
-
+---
 #### Answer
-```python
+1. Compute the raw logit outputs
+2. Normalize the outputs
+3. Turn outputs into softmax values
+4. Calculate the loss (maximum log likelihood of right class)
+5. Calculate the gradient
+	1. Remember to update the probabilities first
+
+---
+ 
+ ```python
 def softmax_loss(x, y):
 
     loss, dx = None, None
@@ -593,8 +611,17 @@ class TwoLayerNet(object):
         """
 
 ```
-
+---
 #### Answer
+1. Initialize
+	1. Weights
+	2. Biases
+2. Loss function
+	1. Run `affine_forward`, `relu_forward`, then `affine_forward` to get  outputs
+	2. Get losses and dloss with `softmax_loss`
+	3. Run `affine_backward`, `relu_backward`, hen`affine_backward` to get gradients wrt all weights, biases, etc.
+	4. Update weights
+---
 ```python
 class TwoLayerNet(object):
 

@@ -4,7 +4,7 @@ title: CNNs + NNs
 
 # Multi-layer FCN
  
-### Implement a full class of Multi-layer FCNN according to these specs (many functions will be shared from the adjacent page)
+### Implement a full class of Multi-layer FCNN according to these specs (many functions will be shared from the [[Classifiers|adjacent page]])
 
 ```python
 class FullyConnectedNet(object):
@@ -60,8 +60,7 @@ class FullyConnectedNet(object):
         self.num_layers = 1 + len(hidden_dims)
         self.dtype = dtype
         self.params = {}
-
-		# YOUR CODE HERE
+        # YOUR CODE HERE
 
     
     def loss(self, X, y=None):
@@ -93,12 +92,28 @@ class FullyConnectedNet(object):
             for bn_param in self.bn_params:
                 bn_param["mode"] = mode
         scores = None
-
-		# YOUR CODE HERE
+        # YOUR CODE HERE
 
         return loss, grads
 ```
 #### Answer
+----
+**Initialization**:
+1. Loop through dimnsions and output
+	1. Initialize weights to `np.random.randn`
+	2. Set bias to zeros
+	3. If using batchnorm, set $\gamma$ and $\beta$ appropriately (0s, 1s)
+2. Set parameters for batchnorm, dropout, layernorm
+
+**Loss/Grad**:
+1. For each layer
+	1. Run forward pass
+2. Get final score
+3. Get loss and output gradient from the scores (remember to rgularize)
+4. For each layer (in reversed order)
+	1. Update that layer’s gradients with backward pass
+
+----
 
 ```python
 class FullyConnectedNet(object):
@@ -224,14 +239,7 @@ class FullyConnectedNet(object):
 ```
 
 
-For the following optimization algorithms, you can use these pre-defined variables from a `config` dictionary
-- `learning_rate`
-- `momentum`
-- `beta1`
-- `beta2`
-- `betam`
-- `v`
-- `t`
+
 
 ### Implement SGD with momentum according to these specs
 ```python
@@ -247,7 +255,17 @@ def sgd_momentum(w, dw, config):
       moving average of the gradients.
     """
 ```
+
+For the following algorithm, you can use these pre-defined variables from a `config` dictionary
+- `learning_rate`
+- `momentum`
+- `veocity`
+---
 #### Answer
+1. Get velocity
+2. Update weights
+
+---
 ```python
 def sgd_momentum(w, dw, config):
 
@@ -259,7 +277,6 @@ def sgd_momentum(w, dw, config):
     next_w = w + v                                            # update position
 
     return next_w
-
 ```
 
 
@@ -279,8 +296,18 @@ def rmsprop(w, dw, config):
     - cache: Moving average of second moments of gradients.
     """
 ```
+For the following algorithm, you can use these pre-defined variables from a `config` dictionary
+- `learning_rate`
+- `decay_rate`
+- `epsilon`
+- `cache`
 
 #### Answer
+1. Load the 4 values
+2. Update cache 
+3. Update weights
+
+---
 ```python
 def rmsprop(w, dw, config):
     next_w = None
@@ -313,8 +340,26 @@ def adam(w, dw, config=None):
     - t: Iteration number.
     """
 ```
+For the following algorithm, you can use these pre-defined variables from a `config` dictionary
+- `learning_rate`
+- `veocity`
+- `beta1`
+- `beta2`
+- `betam
+- `m``
+- `v`
+- `t
+---
 
-#### Answer
+1. Extract configuration values (`learning_rate`, `beta1`, `beta2`, `epsilon`, `m`, `v`, `t`) from `config`.
+2. Increment timestep `t` in `config`.
+3. Update `m` in `config` with decayed average of past gradients (momentum).
+4. Apply bias correction to `m`.
+5. Update `v` in `config` with decayed average of past squared gradients (RMSprop).
+6. Apply bias correction to `v`.
+7. Calculate the new weights `next_w` using Adam update rule.
+
+---
 ```python
 def adam(w, dw, config=None):
 
@@ -376,7 +421,28 @@ def batchnorm_forward(x, gamma, beta, bn_param):
     - cache: A tuple of values needed in the backward pass
     """
 ```
+---
 #### Answer
+
+1. Extract `mode`, `eps`, and `momentum` from `bn_param`.
+2. Get the shape `N, D` from input `x`.
+3. Initialize `running_mean` and `running_var` with zeros if not in `bn_param`.
+
+If `mode` is "train":
+4. Compute mean `mu` and variance `var` of `x` along axis 0.
+5. Calculate standard deviation `std` of `x`.
+6. Normalize `x` to `x_hat`.
+7. Scale and shift `x_hat` to `out` using `gamma` and `beta`.
+8. Store necessary values in `cache` for backpropagation.
+9. Update `running_mean` and `running_var` using `momentum`.
+
+If `mode` is "test":
+10. Normalize `x` using `running_mean` and `running_var`.
+11. Scale and shift as in training mode.
+12. Raise error if `mode` is invalid.
+13. Update `bn_param` with new `running_mean` and `running_var`.
+
+---
 ```python
 def batchnorm_forward(x, gamma, beta, bn_param):
     mode = bn_param["mode"]
@@ -389,8 +455,6 @@ def batchnorm_forward(x, gamma, beta, bn_param):
 
     out, cache = None, None
     if mode == "train":
-
-        
         mu = x.mean(axis=0)        # batch mean for each feature
         var = x.var(axis=0)        # batch variance for each feature
         std = np.sqrt(var + eps)   # batch standard deviation for each feature
@@ -445,7 +509,13 @@ def batchnorm_backward(dout, cache):
     - dbeta: Gradient with respect to shift parameter beta, of shape (D,)
     """
 ```
+---
 #### Answer
+
+1. 
+
+---
+
 ```python
 def batchnorm_backward(dout, cache):
 	dx, dgamma, dbeta = None, None, None
@@ -659,8 +729,8 @@ def dropout_backward(dout, cache
 # CNN
 ### Implement `convolutional forward pass` according to these specs
 ```python
-def conv_forward_naive(x, w, b, conv_param):
-    """A naive implementation of the forward pass for a convolutional layer.
+def conv_forward(x, w, b, conv_param):
+    """A implementation of the forward pass for a convolutional layer.
 
     The input consists of N data points, each with C channels, height H and
     width W. We convolve each input with F different filters, where each filter
@@ -688,7 +758,7 @@ def conv_forward_naive(x, w, b, conv_param):
 ```
 #### Answer
 ```python
-def conv_forward_naive(x, w, b, conv_param):
+def conv_forward(x, w, b, conv_param):
 
     out = None
 
@@ -762,12 +832,12 @@ def conv_forward_strides(x, w, b, conv_param):
 
 ### Implement `convolutional backward pass` according to these specs
 ```python
-def conv_backward_naive(dout, cache):
-    """A naive implementation of the backward pass for a convolutional layer.
+def conv_backward(dout, cache):
+    """An implementation of the backward pass for a convolutional layer.
 
     Inputs:
     - dout: Upstream derivatives.
-    - cache: A tuple of (x, w, b, conv_param) as in conv_forward_naive
+    - cache: A tuple of (x, w, b, conv_param) as in conv_forward
 
     Returns a tuple of:
     - dx: Gradient with respect to x
@@ -777,7 +847,7 @@ def conv_backward_naive(dout, cache):
 ```
 #### Answer
 ```python
-def conv_backward_naive(dout, cache):
+def conv_backward(dout, cache):
     dx, dw, db = None, None, None
     
     # Helper function (warning: numpy 1.20+ is required)
@@ -829,8 +899,8 @@ def conv_backward_strides(dout, cache):
 
 ### Implement `maxpooling forward pass` according to these specs
 ```python
-def max_pool_forward_naive(x, pool_param):
-    """A naive implementation of the forward pass for a max-pooling layer.
+def max_pool_forward(x, pool_param):
+    """An implementation of the forward pass for a max-pooling layer.
 
     Inputs:
     - x: Input data, of shape (N, C, H, W)
@@ -853,7 +923,7 @@ def max_pool_forward_naive(x, pool_param):
 
 #### Answer
 ```python
-def max_pool_forward_naive(x, pool_param):
+def max_pool_forward(x, pool_param):
     out = None
 
     S1 = S2 = pool_param['stride'] # stride: up = down
@@ -901,10 +971,11 @@ def max_pool_forward_fast(x, pool_param):
 
 
 
-### Implement `maxpooling backward pass` according to these specs
+### Implement `MaxPooling backward pass` according to these specs
+
 ```python
-def max_pool_backward_naive(dout, cache):
-    """A naive implementation of the backward pass for a max-pooling layer.
+def max_pool_backward(dout, cache):
+    """An implementation of the backward pass for a max-pooling layer.
 
     Inputs:
     - dout: Upstream derivatives
@@ -917,7 +988,7 @@ def max_pool_backward_naive(dout, cache):
 
 #### Answer
 ```python
-def max_pool_backward_naive(dout, cache):
+def max_pool_backward(dout, cache):
     dx = None
 
     x, pool_param = cache     # expand cache
