@@ -30,8 +30,8 @@ I also feel the need to note that absolutey note of the content on this website 
 2. [[/ml/cv|Computer Vision]]: modern computer vision
 3. [[/ml/nlp|Natural Language Processing]]: NLP!
 4. [[/ml/rl|Reinforcement Learning ]]: reinforcement learning
-4. [[/ml/cuda|CUDA]]: programming gpus
-## Entrepeneurship
+4. [[/ml/cuda|CUDA]]: programming GPUs
+## Entrepreneurship
 1. [[/customer-research|Customer Research (brief)]]
 
 ## Frontend / Javascript

@@ -1,6 +1,7 @@
 ---
 title: Classifiers
 ---
+<!---->
 # K Nearest Neighbors
 
 #### Create a KNN distance computation according to these specs 
@@ -49,14 +50,13 @@ def compute_distance(self, X):
 	return dists
 ```
 
- 
+ <!---->
 ####  Implement cross validation with the following parameters
 ```python
 num_folds = 5
 k_choices = [1, 3, 5, 8, 10, 12, 15, 20, 50, 100]
 ```
 ---
-
 #### Answer
 
 1. Set up the folds
@@ -104,7 +104,7 @@ for k in sorted(k_to_accuracies):
 
 ```
 
-
+<!---->
 # Support Vector Machine Classsifier
 
 ####  Calculate the SVM gradient and loss according to specs
@@ -145,6 +145,26 @@ def svm_loss(W, X, y, reg):
 
 ---
 
+```python
+def svm_loss(W, X, y, reg):
+    loss = 0.0
+    dW = np.zeros(W.shape)  
+
+    N = len(y)     # number of samples
+    Y_hat = X @ W  # raw scores matrix
+
+    y_hat_true = Y_hat[range(N), y][:, np.newaxis]    # scores for true labels
+    margins = np.maximum(0, Y_hat - y_hat_true + 1)   # margin for each score
+    loss = margins.sum() / N - 1 + reg * np.sum(W**2) # regularized loss
+
+    dW = (margins > 0).astype(int)    # initial gradient with respect to Y_hat
+    dW[range(N), y] -= dW.sum(axis=1) # update gradient to include correct labels
+    dW = X.T @ dW / N + 2 * reg * W   # gradient with respect to W
+
+    return loss, dW
+```
+
+<!---->
 ```python
 def svm_loss(W, X, y, reg):
     loss = 0.0
@@ -250,6 +270,7 @@ def train(
 ```
 
 
+<!---->
 # Softmax Classifer
 
 #### Implement gradient and loss for softmax classifier given these specs
@@ -329,7 +350,7 @@ def softmax_loss(W, X, y, reg):
 
 
 
-
+<!---->
 # Fully Connected Neural Network
 
 #### Create an `affine_forward` function according to these specs
@@ -369,7 +390,7 @@ def affine_forward(x, w, b):
 	return out, cache
 ```
 
-
+<!---->
 #### Create an `affine_backward` function according to these specs
 ```python
 def affine_backward(dout, cache):
@@ -409,6 +430,7 @@ def affine_backward(dout, cache):
 	return (dx, dw, db)
 ```
 
+<!---->
 #### Create a `forward pass for ReLU` activation function according to these specs
 
 ```python
@@ -435,6 +457,7 @@ def relu_forward(x):
 	return (out, cache)
 ```
 
+<!---->
 #### Create a `backward pass for ReLU` activation function according to these specs
 ```python
 def relu_backward(dout, cache):
@@ -461,6 +484,7 @@ def relu_backward(dout, cache):
 ```
 
 
+<!---->
 #### Implement `svm_loss` according to these specs
 ```python
 def svm_loss(x, y):
@@ -480,7 +504,6 @@ def svm_loss(x, y):
 ```
 ---
 #### Answer
-
 1. Get the probabilities assigned to the correct predictions (ensure the shape is correct for broadcasting)
 2. Calculate the margins
 3. Use margins to calculate loss
@@ -503,7 +526,7 @@ def svm_loss(x, y):
 ```
 
 
-
+<!---->
 #### Implement `softmax_loss` according to these specs
 ```python
 def softmax_loss(x, y):
@@ -550,7 +573,7 @@ def softmax_loss(x, y):
     return loss, dx
 ```
 
-
+<!---->
 #### Build out a full Two Layer Neural Network according to these specs
 ```python
 class TwoLayerNet(object):

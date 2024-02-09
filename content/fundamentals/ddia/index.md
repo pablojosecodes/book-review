@@ -38,4 +38,4 @@ I'd recommend reading in order of the files, but I've tried to make the informat
 	2. [[Partitioning|Partitioning]] 
 	3. [[Transactions]]
 	4. [[Consistency and Consensus]]
-2. [[/fundamentals/ddia/Derived Data|Derived Data]] How do we represent data? 
+2. [[fundamentals/ddia/Derived Data/index|Derived Data]] How do we represent data? 

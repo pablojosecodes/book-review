@@ -12,6 +12,7 @@ We’ll organize into two sections
 	- Temporal Softmax Layer
 	- LSTM Layers
 - RNN: Using these layers to implement image captioning
+<!---->
 # RNN Layers
 
 
@@ -36,7 +37,7 @@ def rnn_step_forward(x, prev_h, Wx, Wh, b):
     - cache: Tuple of values needed for the backward pass.
     """
 ```
-
+---
 #### Answer
 ```python
 def rnn_step_forward(x, prev_h, Wx, Wh, b):

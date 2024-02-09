@@ -2,8 +2,10 @@
 title: CNNs + NNs
 ---
 
+<!---->
 # Multi-layer FCN
- 
+
+
 ### Implement a full class of Multi-layer FCNN according to these specs (many functions will be shared from the [[Classifiers|adjacent page]])
 
 ```python
@@ -96,8 +98,9 @@ class FullyConnectedNet(object):
 
         return loss, grads
 ```
+---
 #### Answer
-----
+
 **Initialization**:
 1. Loop through dimnsions and output
 	1. Initialize weights to `np.random.randn`
@@ -239,7 +242,7 @@ class FullyConnectedNet(object):
 ```
 
 
-
+<!---->
 
 ### Implement SGD with momentum according to these specs
 ```python
@@ -278,7 +281,7 @@ def sgd_momentum(w, dw, config):
 
     return next_w
 ```
-
+<!---->
 
 ### Implement RMSProp update rule according to these specs
 
@@ -321,7 +324,7 @@ def rmsprop(w, dw, config):
     return next_w
 ```
 
-
+<!---->
 ### Implement ADAM update rule to these specs
 
 ```python
@@ -378,7 +381,7 @@ def adam(w, dw, config=None):
     return next_w, config
 ```
 
-
+<!---->
 # Batchnorm
 
 ### Implement `forward pass for batchnorm` according to these specs
@@ -489,7 +492,7 @@ def batchnorm_forward(x, gamma, beta, bn_param):
 
 ```
 
-
+<!---->
 ### Implement `backward pass for batchnorm` according to these specs
 ```python
 def batchnorm_backward(dout, cache):
@@ -537,7 +540,7 @@ def batchnorm_backward(dout, cache):
 
     return dx, dgamma, dbeta
 ```
-
+<!---->
 
 ### Implement `an alternative backward pass for batchnorm` according to these specs
 ```python
@@ -574,7 +577,7 @@ def batchnorm_backward_alt(dout, cache):
 
 ```
 
-
+<!---->
 ### Implement `an forward pass for layernorm` according to these specs
 ```python
 def layernorm_forward(x, gamma, beta, ln_param):
@@ -614,6 +617,7 @@ def layernorm_forward(x, gamma, beta, ln_param):
     return out, cache
 
 ```
+<!---->
 ### Implement `a backward pass for layernorm` according to these specs
 ```python
 def layernorm_backward(dout, cache):
@@ -643,7 +647,7 @@ def layernorm_backward(dout, cache):
 
     return dx, dgamma, dbeta
 ```
-
+<!---->
 # Dropout
 
 ### Implement `dropout forward pass` according to these specs
@@ -700,6 +704,7 @@ def dropout_forward(x, dropout_param):
     return out, cache
 ```
 
+<!---->
 ### Implement `dropout backward pass` according to these specs
 ```python
 def dropout_backward(dout, cache):
@@ -726,6 +731,7 @@ def dropout_backward(dout, cache
     return dx
 
 ```
+<!---->
 # CNN
 ### Implement `convolutional forward pass` according to these specs
 ```python
@@ -783,7 +789,7 @@ def conv_forward(x, w, b, conv_param):
     cache = (x, w, b, conv_param)
     return out, cache
 ```
-
+<!---->
 #### Faster Answer
 ```python
 def conv_forward_strides(x, w, b, conv_param):
@@ -829,7 +835,7 @@ def conv_forward_strides(x, w, b, conv_param):
     return out, cache
 
 ```
-
+<!---->
 ### Implement `convolutional backward pass` according to these specs
 ```python
 def conv_backward(dout, cache):
@@ -895,7 +901,7 @@ def conv_backward_strides(dout, cache):
     return dx, dw, db
 
 ```
-
+<!---->
 
 ### Implement `maxpooling forward pass` according to these specs
 ```python
@@ -943,6 +949,7 @@ def max_pool_forward(x, pool_param):
     return out, cache
 
 ```
+---
 #### Faster Answer
 ```python
 def max_pool_forward_fast(x, pool_param):
@@ -970,7 +977,7 @@ def max_pool_forward_fast(x, pool_param):
 ```
 
 
-
+<!---->
 ### Implement `MaxPooling backward pass` according to these specs
 
 ```python
@@ -985,7 +992,7 @@ def max_pool_backward(dout, cache):
     - dx: Gradient with respect to x
     """
 ```
-
+---
 #### Answer
 ```python
 def max_pool_backward(dout, cache):
@@ -1010,6 +1017,7 @@ def max_pool_backward(dout, cache):
 
 ```
 
+---
 #### Faster Answer
 ```python
 def max_pool_backward_fast(dout, cache):
@@ -1028,7 +1036,7 @@ def max_pool_backward_fast(dout, cache):
         raise ValueError('Unrecognized method "%s"' % method)
 ```
 
-
+---
 
 # Utilities for the faster functions
 ```python

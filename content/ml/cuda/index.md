@@ -32,9 +32,21 @@ Here's some stuff I've directly used this content to build
 
 ## the content
 
-I'd recommend reading in order of the files, but I've tried to make the information as atomic as possible- enjoy!
 
-1. [[/1|Section 1]] useful for this that and the other
-2. [[/1|Section 1]] useful for this that and the other
-3. [[/1|Section 1]] useful for this that and the other
-4. [[/1|Section 1]] useful for this that and the other
+The author’s recommendations are as folows
+
+All chapters are meant to be covered in around one 75-minute lecture each
+- Exception: 11, 14, 15 (2 lectures)
+
+2 phases
+1. Phase 1: Part I and Part II
+	1. Learn about fundamentals and basic patterns
+	2. ~7 weeks
+	3. Each week- coresponding programming assignment for each lecture
+	4. By end: comfortable with parallel progamming- reay for more advanced code
+2. Phase 2: Part III and IV
+	1. Adanced patterns + final project which involves accelerating an advanced pattern or application
+
+
+The final project: refer to current state of the art (ideally other courses which have their guideines posted). Involves
+
