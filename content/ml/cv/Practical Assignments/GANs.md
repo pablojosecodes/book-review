@@ -1,7 +1,7 @@
 ---
 title: GANs
 ---
-
+<!---->
 # Implement `sample_noise`
 
 ```python
@@ -22,6 +22,7 @@ def sample_noise(batch_size, dim, seed=None):
 
 	# CODE GOES HERE
 ```
+---
 
 ## Answer
 ```python
@@ -31,7 +32,7 @@ def sample_noise(batch_size, dim, seed=None):
     return -2 * torch.rand(batch_size, dim) + 1
 
 ```
-
+<!---->
 # Look at `Unflatten`
 ```python
 class Unflatten(nn.Module):
@@ -50,7 +51,7 @@ class Unflatten(nn.Module):
 ```
 
 
-
+<!---->
 # Implement Discriminator
 
 The Architecture
@@ -73,6 +74,7 @@ def discriminator(seed=None):
 
 	# CODE GOES HERE
 ```
+---
 
 ### Answer
 ```python
@@ -95,6 +97,7 @@ def discriminator(seed=None):
 
     return model
 ```
+<!---->
 # Implement Generator
 
 **The Architecture**
@@ -117,7 +120,7 @@ def generator(noise_dim=NOISE_DIM, seed=None):
 
 	# CODE GOES HERE
 ```
-
+---
 ### Answer
 ```python
 def generator(noise_dim=NOISE_DIM, seed=None):
@@ -142,7 +145,7 @@ def generator(noise_dim=NOISE_DIM, seed=None):
 
     return model
 ```
-
+<!---->
 # Understand BCE Loss
 ```python
 def bce_loss(input, target):
@@ -164,6 +167,7 @@ def bce_loss(input, target):
     loss = input.clamp(min=0) - input * target + (1 + neg_abs.exp()).log()
     return loss.mean()
 ```
+<!---->
 # Implement Generator Loss
 You can use BCE Loss
 
@@ -183,7 +187,7 @@ def discriminator_loss(logits_real, logits_fake):
 
 	# CODE GOES HERE
 ```
-
+---
 ## Answer
 ```python
 def discriminator_loss(logits_real, logits_fake):
@@ -193,6 +197,7 @@ def discriminator_loss(logits_real, logits_fake):
     loss = loss_fake + loss_real
     return loss
 ```
+<!---->
 # Implement Discriminator Loss
 You can use BCE Loss
 ```python
@@ -210,6 +215,7 @@ def generator_loss(logits_fake):
 
 	# CODE GOES HERE
 ```
+---
 
 ## Answer
 ```python
@@ -220,6 +226,7 @@ def generator_loss(logits_fake):
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
     return loss
 ```
+<!---->
 # Implement `get_optimizer`
 
 ```python
@@ -238,7 +245,7 @@ def get_optimizer(model):
 
 	# CODE GOES HERE
 ```
-
+---
 ## Answer
 ```python
 def get_optimizer(model):
@@ -247,7 +254,7 @@ def get_optimizer(model):
 
     return optimizer
 ```
-
+<!---->
 # Understand Training Loop
 ```python
 def run_a_gan(D, G, D_solver, G_solver, discriminator_loss, generator_loss, loader_train, show_every=250,
@@ -302,7 +309,7 @@ def run_a_gan(D, G, D_solver, G_solver, discriminator_loss, generator_loss, load
 
     return images
 ```
-
+<!---->
 # Least Squares GAN
 [Least Squared GAN](https://arxiv.org/abs/1611.04076) is a newer, more stable alternative to the original GAN loss function.
 
@@ -310,6 +317,7 @@ We’ll be implementing Equation 9 from the paper
 
 > Note: whe plugging in for $D(x)$ and $D(G(z))$ use the output from the discriminator (`scores_real` and `scores_fake`)
 
+<!---->
 # Implement `ls_discriminator_loss`
 
 ```python
@@ -328,6 +336,7 @@ def ls_discriminator_loss(scores_real, scores_fake):
 
 	# CODE GOES HERE
 ```
+---
 ## Answer
 ```python
 def ls_discriminator_loss(scores_real, scores_fake):
@@ -336,7 +345,7 @@ def ls_discriminator_loss(scores_real, scores_fake):
 
     return loss
 ```
-
+<!---->
 # Implement `ls_generator_loss`
 
 ```python
@@ -354,7 +363,7 @@ def ls_generator_loss(scores_fake):
 
 	CODE GOES HERE
 ```
-
+---
 ## Answer
 
 ```python
@@ -365,6 +374,7 @@ def ls_generator_loss(scores_fake):
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
     return loss
 ```
+<!---->
 # Implement `build_dc_classifier`
 Use a discrminator inspire by the TensorFlow MNIST tutorial, which is pretty dang efficient
 - Reshape into image tensor (Use Unflatten!)
@@ -386,7 +396,7 @@ def build_dc_classifier(batch_size):
     """
 
 ```
-
+---
 ## Answer
 ```python
 def build_dc_classifier(batch_size):
@@ -410,7 +420,7 @@ def build_dc_classifier(batch_size):
     )
 ```
 
-
+<!---->
 # Similarly, implement Generator
 
 Architecture
@@ -436,7 +446,7 @@ def build_dc_generator(noise_dim=NOISE_DIM):
     """
 	# CODE GOES HERE
 ```
-
+---
 ## Answer
 ```python
 def build_dc_generator(noise_dim=NOISE_DIM):

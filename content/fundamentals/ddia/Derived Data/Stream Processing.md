@@ -3,7 +3,7 @@ title: Stream Processing
 ---
 We iscussed batch processing and saw how the output is a form of *derived data*
 
-But, we made a big assumption- that hte input is bounded
+But, we made a big assumption- that the input is bounded
 
 In reality- data is unbounded very often- can gradually arrive
 

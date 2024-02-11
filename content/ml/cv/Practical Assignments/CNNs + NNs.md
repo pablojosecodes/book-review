@@ -1037,7 +1037,7 @@ def max_pool_backward_fast(dout, cache):
 ```
 
 ---
-
+<!---->
 # Utilities for the faster functions
 ```python
 def max_pool_forward_reshape(x, pool_param):

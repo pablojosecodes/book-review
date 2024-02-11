@@ -13,10 +13,10 @@ TODO good tutorials
 2. PyTorch Module API: `nn.Module` to define arbitrary nn architectures
 3. PyTorch Sequential API: `nn.Sequential`
 
-
+<!---->
 ## 1: Barebones
 
-Pytorch has high-leve APIs, but for now let’s just use barebone PyTorch elemneets to undrstand autograd.
+Pytorch has high-level APIs, but for now let’s just use barebone PyTorch elemneets to undrstand autograd.
 
 First, let’s make a simple fully-connected ReLU network with 2 hidden layers and no biases. Let’s use PyTorch autograd to compute the tensors
 
@@ -37,7 +37,7 @@ def flatten(x):
     N = x.shape[0] # read in N, C, H, W
     return x.view(N, -1)  # "flatten" the C * H * W values into a single vector per image
 ```
-
+<!---->
 #### Barebone PyTorch: Two-Layer network
 
 Important to understand this implementation
@@ -93,7 +93,7 @@ two_layer_fc_test()
      
 # torch.Size([64, 10])
 ```
-
+<!---->
 ### Implement a 3-layer ConvNet with the following specification using `nn.Functional`
 
 **Architecture**
@@ -132,6 +132,7 @@ def three_layer_convnet(x, params):
     conv_w1, conv_b1, conv_w2, conv_b2, fc_w, fc_b = params
     scores = None
 ```
+---
 
 #### Answer
 ```python
@@ -146,8 +147,9 @@ def three_layer_convnet(x, params):
 
     return scores
 ```
-
+<!---->
 #### barebones pytorch: initialization
+Understand it
 
 Separate functions for
 - Initializing weight tensor with Kaiming normalization method
@@ -173,6 +175,7 @@ def zero_weight(shape):
     return torch.zeros(shape, device=device, dtype=dtype, requires_grad=True)
 ```
 
+<!---->
 ### Barebones pytorch: training loop
 Understand it
 
@@ -226,7 +229,7 @@ def train_part2(model_fn, params, learning_rate):
             print()
 
 ```
-
+<!---->
 ## 2: Python Module API
 Now let’s use `nn.module`
 
@@ -265,7 +268,7 @@ def test_TwoLayerFC():
     print(scores.size())  # you should see [64, 10]
 test_TwoLayerFC()
 ```
-
+<!---->
 ### Implement a three layer networ according to these specs
 
 Architecture
@@ -283,6 +286,7 @@ class ThreeLayerConvNet(nn.Module):
         super().__init__()
     def forward(self, x):
 ```
+----
 
 ### Answer
 
@@ -305,7 +309,7 @@ class ThreeLayerConvNet(nn.Module):
         scores = self.fc(flatten(x))
         return scores
 ```
-
+<!---->
 ### Module API: how to check accuracy
 ```python
 def check_accuracy_part34(loader, model):
@@ -328,6 +332,7 @@ def check_accuracy_part34(loader, model):
         print('Got %d / %d correct (%.2f)' % (num_correct, num_samples, 100 * acc))
 ```
 
+<!---->
 ### Module API: how to run a training loop
 
 Rather than updating the values of the weights ourselves, we use an Optimizer object from the torch.optim package, which abstract the notion of an optimization algorithm and provides implementations of most of the algorithms commonly used to optimize neural networks.
@@ -385,12 +390,12 @@ optimizer = optim.SGD(model.parameters(), lr=learning_rate)
 train_part34(model, optimizer)
 ```
 
-
+<!---->
 # 3: Sequential API
 
 This API merges the 3 steps of the module API into just one
 
-### Sequential API: Defining a 2-layer FCN
+### Understand Sequential API: Defining a 2-layer FCN
 Also training it
 ```python
 class Flatten(nn.Module):
@@ -414,7 +419,8 @@ optimizer = optim.SGD(model.parameters(), lr=learning_rate,
 train_part34(model, optimizer)
 ```
 
-### Build a 3-layer FCN accrding to specs
+<!---->
+### Build a 3-layer FCN accrding to specs with `nn.sequential`
 
 Architecture
 1. Convolutional layer (with bias) with 32 5x5 filters, with zero-padding of 2
