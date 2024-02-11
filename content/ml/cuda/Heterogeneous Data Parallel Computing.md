@@ -128,3 +128,5 @@ dim3 dimBlock(128,1,1);
 vecAddKernel <<<dimGrid, dimBlock>>>(..)
 ```
 ETC.
+
+Dimensions are a factor of $\int \lambda \frac{\beta}{\alpha}$
