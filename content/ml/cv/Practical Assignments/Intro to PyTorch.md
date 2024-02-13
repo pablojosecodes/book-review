@@ -269,7 +269,7 @@ def test_TwoLayerFC():
 test_TwoLayerFC()
 ```
 <!---->
-### Implement a three layer networ according to these specs
+### Implement a three layer network according to these specs
 
 Architecture
 1. Convolutional layer with channel_1 5x5 filters with zero-padding of 2

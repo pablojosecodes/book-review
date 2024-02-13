@@ -31,6 +31,26 @@ This is a common approach for notifying ocnsumers about new events
 
 
 # Databases and Streams
+
+We’ve seen how message brokers have taken ideas from databaes and applie them to messaging, but what about the reverse
+- Take ideas frommessage / streams and apply them to database
+
+Remember event: something which happened at some point in time (including write to a database)
+- Fundamental link between databases and streams
+
+Replication log- stream of database write events!
+
+## Keeping systems in sync
+
+No single system can work- usually need several, all of which need their own data and so on
+- Need to keep them all in sync
+
+If full database dumps re two slow, dual writes are occasionally used- app explicitly writes to each of the systems when data changes
+- Isses
+	- Race condition
+- Ideal situation would instead be having a single leader, maje other system a follower
+
+
 TODO
 
 # Processing Streams

@@ -125,7 +125,7 @@ Different philosophies
 We shouild try to combine the best of both worlds.
 
 ## Composing Data Storage Technologies
-We’ve talked about lots of feautres from databasees and hwo they work. 
+We’ve talked about lots of feautres from databasees and how they work. 
 
 There are parallels between features in databases and derived data systems
 
@@ -184,11 +184,25 @@ No unbundled-database equivalent of the Unix shel
 
 ## Designing Applications around Dataflow
 
+
+
+
+
+
+
 TODO
+
 
 ## Observing Desired State
 
 TODO
+
+
+
+
+
+
+
 
 
 

@@ -54,11 +54,16 @@ Basic idea of linearizability: “behave as if only one copy of the data and all
 
 Naive approach: use one copy of the data
 
-But when using replication, how amenable are different methods to linearizability? (TODO fill out bullets)
-- Single leader replication: potentially
-- Consensus algorithms: linearizable
-- Multi-leader replciation: not
-- Leaderess replication: probably not
+But when using replication, how amenable are different methods to linearizability? 
+- Single Leader Replication: potentially
+	- Leader has primary copy of data and folllowers maintain backup copies
+	- If you make reads from leadr or from synchronously updaed followers, can be linearizable
+- Consensus Algorithms: linearizable
+- Multi-leader Replication: not 
+	- They concurrently process writes on multiple nodes and asynchronously replicate them- can create conflicts
+- Leaderless Replication: probably not
+	- Some claim that you can get strong consistency by requirimg quorum reads and writes- generally not quite true
+	- Last write win conflict resolution based on time-of-day clocks re almost certainly nonlinearizable and same for slppy quorums
 
 ### Linearizability and quorums
 Seems like strict quorum reads / writes should be linearizable, but this is only really possible at the cost of reduced performacnce- reader must rperofrmm read repeir synchronously
@@ -66,12 +71,16 @@ Seems like strict quorum reads / writes should be linearizable, but this is only
 ## The cost of Linearizability
 
 Useful to explore pros / cons of linearizability especially as only some replication methods can provide it
-TODO
 
+Consider impact of network interruption between two datacenters
+- I multi-leader datbase- each datacenter can operate normally
+- Single leader- leader must e in one of teh dataceenters and thus if
+	- Linearizable: clients connected to follower datasets cannot make reads
+	- Non-linearizable: will stilll make (possibly stale) reads
 #### CAP Theorem
 Any linearizable database has this problem- the tradeoff:
 - If your application **requires** linearizability and some replicas are disconnected, the some replicas can’t process requests while they’re disconnected
-- If your application does not require linearizability,c an be written in a way that each replcia can process requests independently. Can be avilable in the face of a network but without being linearizable
+- If your application does not require linearizability, it can be written in a way that each replcia can process requests independently. Can be available in the face of a network but without being linearizable
 
 **Insight**: Applications which don’t require linearizability can be more tolerant of network problems
 
@@ -79,7 +88,7 @@ Any linearizable database has this problem- the tradeoff:
 
 CAP
 - **Originally**: broad rule of thumb
-- Created shift
+- Created a movement/shift
 	- Before: focus on distibuted systems with liearizable semantics
 	- Then: wider design space
 - Now superseded by more precise results

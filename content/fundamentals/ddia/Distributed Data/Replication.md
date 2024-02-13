@@ -116,6 +116,161 @@ Real-world usage: [Databus](https://github.com/linkedin/databus) for Oracle and 
 ## Problems with Replication Lag
 
 
+Replication is essential for tolerating node failures, scalability, latency
+
+Leader based replication requires all writes go througha single node (**read-scaling** architecture)
+- Very attractive for read-heavy workloads
+- Only realistic for asynchronous replication (can’t synchronously replicate to all followers)
+
+The lag between replicas is known as replication lag
+-  Can become a problem at a large enough lag and scale
+
+## Reading your own writes
+
+Issue: Many apps let users submit data and view submission
+- What issues might be caused by replication lag?
+- Well, you might read stale data that you just wrote
+
+Fix?
+- **Read-after-write** consistency- guarantee that they’ll see updates they themselves submitted
+- How? A few techniques
+	- If reading something user may hae modified,read from the leader (e.g. read user’s own profile from leader)
+	- Use other criteria to decide whether to read fromthe leader- could track replication lag or how recent submission was
+	- Cient can remember timestamp of most recent write and ensure that replica has been served writes up to that point in time
+
+But what about multiple devices? Harder
+- No guarantee connections will route to same datacenter
+- How to see timestamps across devices?
+
+## Monotonic Reads
+Issue: user seeing things moving back in time
+- When you read from replica that is further forward in time and then aftre a replica that still hasn’t received updaes
+
+How to fix? **monotonic reads**
+- Basically- guarantee that reads in sequence won’t go backwards in time
+- Sample implementation: make user always make read from same replica
+
+## Consistent prefix Reads
+
+Issue: causality broken
+- e.g. messages routed in lag and answer appears before question
+
+Sample solution: Make sure writes that are causally related to each other written to the same partition
+
+## Solutions for Replication Lag
+
+If you’re working with an eventually consistent system, ask “how will this behave if replication lag increases”
+
+# Multi-Leader Replication
+
+Big con with leader-based relication: only one leader and all writes need to go through it.
+
+Multi-leader: more than one node can accept writes
+- Master-master replication
+- Active-active replication
+
+## Use cases
+Not useful within a single datacenter, but here are some useful situations
+- Multi-Datacenter Operation
+	- Leader in each datacenter
+	- Higher performance, higher tolerance of outages/network problems
+- Clients with Offline Operation
+	- Local database which acts as leader
+- Collaborative Editing
+	- See ‘automatic conflict resolution’ in the book TODO
 
 
-TODO
+## Handling Write Conflicts
+
+But now we ned conflict resolution mechanisms
+
+**Conflict avoidance**
+Simplest (and quite common) strategy for dealing with conflicts is to avoid them
+
+But how? Well you could make all writes for a specific record go through the same leader.
+
+**Converging towards a consistent database**
+
+We know that in single leader databases, the writes are applied in a sequential order
+
+But we don’t have a defined ordering of writes in a multi-leader configuration
+- What should the final value be?
+
+We can’t have each replica apply writes in the order that they see them- the conflict must be resolved in a **convergent** way
+
+A couple methods of convergent conflict resolutoin
+- Each write is given a unique ID- pick write with highest ID as winner (LWW)
+	- Prone to data loss
+- Each write is given a unique ID, and writes which originate at higher-numbered replica take precedence
+- Merge the values somehow
+- Record the conflict explicitly and have application code resolve the conflict later on
+
+**Custom conflict resolution logic**
+
+Resolving conflict may be app dependent
+
+Your code can be executed either on write or on read
+- On write: as soon as database detects conflictin log of replicated changes
+- On read: When a conflict is detected, all the conflicting writes are stored. The next time the data is read, these multiple versions of the data are returned to the application- which deals with it.
+
+**What is a conflict?**
+Obvious- 2 writes concurrently
+
+Also- e.g. meeting booking system where mutliple book same room
+
+
+
+# Multi-leader Replication Topologies
+
+**Replicaton topology**: communicatoin paths which writes take from one node to another
+- Most general: all-to-all
+	- Each leader sends writes to all other leaders
+- Circular topology
+	- Node receives writes from one node and forwards those writes to another node
+- Star Topology
+	- One designated root node forwards writes to all the other nodes
+
+# Leaderless Replication
+
+Replication so far has been based on the idea that a client sends a write rquest to one node and the database copies write to other replicas
+
+But what about leaderless replication- accept writes directly from clients
+
+A key distinction between different leaderless replciation methods
+- Does the client write directly to several replcis or does a coordinator node do this on behalf of it?
+
+## Writing to database when node is down
+Failover doesn’t exist when you’re using leaderless replication
+- User sends request to several nodes in parallel
+- But how does node catch up after failing and coming back? 2 mechanisms
+	- Read repair: If client detects stale data (ie 3/4 say something different than 1/4 nodes), writes right data back
+	- Anti-entropy process: background process which looks for differences in data
+- Quorum for reading and writing: the number of nodes needed to consider succesful writing/reading
+
+## Limitations of Quorum Consistency
+Even with conservative parameters, there are likely edge cases where stale values are returned
+- These are pretty easy to think of- some unfotunae failure cases in timing and fails
+
+In leaderless replication- how to **monitor for staleness**?
+
+
+## Sloppy Quorums and Hinted Handoffs
+
+Databases with well set quorums can tolerate the failure of individual nodes without needing failover
+
+But- quourms are not as fault-tolernant as they could be
+- Network interruption could cut off client from large number of database nodes
+
+How to address this? **Sloppy quorum** would be the practice of still accepting writes and reads, even if you switch nodes from original “home” nodes- 
+- **Hinted handoff**: after network comesonline- writes which were accepted temporarily by non-home nodes are sent to appropriate home nodes
+
+
+## Detecting Concurrent Writes
+Even with strict quorums, some databaes allow several clients to concurrently write to the same key- conflict will occur even with strict quorums
+
+In order to become eventually consistent, replicas should converge to the same value.
+- Databases aren’t great at this currently
+
+Important to know all the failure cases and how to handle this on the application side!
+
+Lots potential solutions here.

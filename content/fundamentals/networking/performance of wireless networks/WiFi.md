@@ -62,7 +62,6 @@ Probabilistic scheduling → high number of collisions between wireless peers
 
 
 # Optimizing for WiFi networks
-
 Hard to beat the simple convenience of wifi- let’s learn how we can leverage it in our WiFi networks
 
 ## Leverage Unmetered Bandwidth

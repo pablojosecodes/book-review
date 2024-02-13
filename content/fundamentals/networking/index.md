@@ -36,4 +36,5 @@ I'd recommend reading in order of the files, but I've tried to make the informat
 
 1. [[fundamentals/networking/networking 101/index|Networking 101]] useful for this that and the other
 2. [[fundamentals/networking/performance of wireless networks/index|Performance of Wireless Networks]] useful for this that and the other
-3. 
+3. [[fundamentals/networking/HTTP/index|HTTP]]
+4. [[fundamentals/networking/Browser APIs and Networking/index|Browser APIs and Networking]]
