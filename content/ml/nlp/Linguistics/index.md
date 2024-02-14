@@ -1,7 +1,6 @@
 ---
 title: Linguistics
 ---
-
 TOC
 - [[Word Vectors]]
 - [[Constituency Parsing]]

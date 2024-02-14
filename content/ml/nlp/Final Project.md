@@ -118,13 +118,13 @@ Example of doing research (e.g. orf applying NN to summariation)
 4. Define metric
 	1. Search for well etablished metrics
 	2. Summarization: ROUGE or human eval
-5. Establish vaseline
-	1. Implement simles model first
+5. Establish baselin
+	1. Implement simple model first
 	2. Summarization: LEAD-3 baseline
 	3. Compute metrics on Train AND dev NOT test 
 	4. often will have errors- analyze
 6. Imlement existing neural net mdel
-	1. Compute metric o train + dev
+	1. Compute metric to train + dev
 	2. Analyze output + error
 7. Always be cose to the data (except final test set)
 	1. Visualize dataset

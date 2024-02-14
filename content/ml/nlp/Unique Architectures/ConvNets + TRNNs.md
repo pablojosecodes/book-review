@@ -1,7 +1,6 @@
 ---
 title: ConvNets + TRNNs
 ---
-
 # CNN review
 
 RNNs can’t capture phrases without prefix context

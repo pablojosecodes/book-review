@@ -19,7 +19,7 @@ Problem statement:
 - Problems
 	- Computationally infeasible (size, aspect ratio)
 	- Imbalanced
-- [ ] Template matching (slide template over image at multple positions.)
+- Template matching (slide template over image at multple positions.)
 
 #### **Haar-Like Features**
 - To detect a given instance (tempalte), a similarity score may be goo neough

@@ -12,12 +12,7 @@ Content I used to learn this material: [Stanford’s CS231N (2023)](http://cs231
 
 I'd recommend reading in order of the files, but I've tried to make the information as atomic as possible- enjoy!
 
-[[Architectures]]
-1. [[Linear Image Classifiers]]
-2. [[CNN Fundamentals]]
-3. [[CNN History]]
-4. [[ml/nlp/Architectures/RNNs|RNNs]]
-5. [[Transformers]]
+In order to udnerstand the key architectures that underpine computer vision, I would advise you to review the fundamental ML section.
 
 [[Applications]]
 1. [[Semantic Segmentation]]
